@@ -15,7 +15,7 @@
 <!-- Name and Title with Fade-in -->
 <div align="center">
   <h1 style="animation: fadeIn 2s;">👨‍🔬 Morteza Sabri</h1>
-  <h3 style="animation: fadeIn 3s;">Bioinformatician | Geneticist by Training | Data-driven Researcher</h3>
+  <h3 style="animation: fadeIn 3s;">Bioinformatician combining genomics, transcriptomics, and data science to uncover biological insights. Seeking PhD opportunities.</h3>
 </div>
 
 <!-- Typing Animated Motto -->
@@ -38,6 +38,7 @@
   <a href="#about-me">About Me</a> •
   <a href="#skills">Skills</a> •
   <a href="#selected-projects">Selected Projects</a> •
+  <a href="#highlighted-pipelines">Highlighted Pipelines</a> •
   <a href="#teaching--workshops">Teaching & Workshops</a> •
   <a href="#publications">Publications</a> •
   <a href="#contact">Contact</a>
@@ -77,6 +78,32 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 
 ---
 
+## 👨‍💻 Highlighted Pipelines 
+
+- **Bulk RNA-Seq (and ployA/ncRNA-Seq**
+  - Input: raw FASTQ files (Illumina) from Human (AAA, Plaque samples), Mouse, and mini-Pig
+  - Mapping: Bowtie2, Salmon, Kallisto, STAR, HISAT2, Subread/featureCounts, bedtools
+  - DE and downstream analysis: DESeq2, edgeR, limma, GO, DO, KEGG, ReactomePA, Pubmed
+
+- **scRNA-Seq (cell and nuclei)**
+  - Input: Count/feature matrix (10x Genomics) from Human blood samples and raw FASTQ files (Parse Biosciences) from Mouse brain samples
+  - Clustering, annotation, DE, and downstream analysis: Seurat and SingleCellExperiment pipelines, deconvolution analysis
+
+- **Genome assembly**
+  - Input: raw FASTQ files (Illumina) from Gambusia Holbrooki
+  - Mapping and scaffolding: velvet, spades, megahit, skesa, unicycler, abyss, and saute
+
+- **Arrays**
+  - Input: raw IDAT files of methylation and expression datasets (Illumina) from Human and Mouse
+  - DE/DM and downstream analysis: limma, GO, DO, KEGG, ReactomePA, Pubmed, etc.
+
+- **Methyl-Seq and ChIP-Seq**
+  - Input: raw FASTQ files from Human and Mouse
+  - Mapping: STAR
+  - Peak calling and downstream analysis: ChIPseeker, DESeq2, GO, ReactomePA
+
+---
+
 ## 🎤 Teaching & Workshops
 - **Instructor:** "Introduction to R for Biologists" and "RNA-Seq Data Analysis" workshops.
 - **Topics Covered:** Data wrangling, visualization, RNA-Seq pipeline basics.
@@ -92,6 +119,13 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 ## 📬 Contact
 
 <p align="center">
+  <b>📧 Get in Touch</b>
+</p>
+
+<p align="center">
+  <a href="mailto:morteza_sabri@icloud.com">
+    <img src="https://img.shields.io/badge/Email-Click%20to%20Write-informational?style=flat-square&logo=icloud&logoColor=white" alt="Email Badge" />
+  </a>
   <a href="https://www.linkedin.com/in/mortezasabri/">
     <img src="https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=flat-square" alt="LinkedIn Badge" />
   </a>
@@ -105,6 +139,8 @@ Currently, I am seeking opportunities to advance my research career through a Ph
     <img src="https://img.shields.io/badge/ORCID-0000--0001--6662--5984-a6ce39?logo=orcid&style=flat-square" alt="ORCID Badge" />
   </a>
 </p>
+
+[Back to Top](#top)
 
 ---
 
