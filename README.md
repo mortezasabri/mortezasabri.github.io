@@ -2,7 +2,7 @@
   <img src="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/ME.jpeg?raw=true" alt="Morteza Sabri" width="600"/>
 </p>
 
-# Morteza Sabri – Bioinformatics Portfolio
+# Morteza Sabri – Portfolio
 
 ## 👨‍🔬 About Me
 I am a geneticist by training and a bioinformatician by experience, with a strong passion for exploring complex biological systems through data. Since 2017, I have been working on various genomics and transcriptomics projects, combining biological insight with computational expertise. I am currently seeking opportunities to advance my research career through a PhD position.
@@ -37,6 +37,32 @@ I am a geneticist by training and a bioinformatician by experience, with a stron
 - **Genome Assembly Collaboration**
   - Participated in genome assembly and annotation of the fish species _Gambusia holbrooki_.
   - Tools: SPAdes, QUAST.
+
+---
+
+## 👨‍💻 Methodology 
+
+- **Bulk RNA-Seq (and ployA/ncRNA-Seq**
+  - Input: raw FASTQ files (Illumina) from Human (AAA, Plaque samples), Mouse, and mini-Pig
+  - Mapping: Bowtie2, Salmon, Kallisto, STAR, HISAT2, Subread/featureCounts, bedtools
+  - DE and downstream analysis: DESeq2, edgeR, limma, GO, DO, KEGG, ReactomePA, Pubmed
+
+- **scRNA-Seq (cell and nuclei)**
+  - Input: Count/feature matrix (10x Genomics) from Human blood samples and raw FASTQ files (Parse Biosciences) from Mouse brain samples
+  - Clustering, annotation, DE, and downstream analysis: Seurat and SingleCellExperiment pipelines, deconvolution analysis
+
+- **Genome assembly**
+  - Input: raw FASTQ files (Illumina) from Gambusia Holbrooki
+  - Mapping and scaffolding: velvet, spades, megahit, skesa, unicycler, abyss, and saute
+
+- **Arrays**
+  - Input: raw IDAT files of methylation and expression datasets (Illumina) from Human and Mouse
+  - DE/DM and downstream analysis: limma, GO, DO, KEGG, ReactomePA, Pubmed, etc.
+
+- **Methyl-Seq and ChIP-Seq**
+  - Input: raw FASTQ files from Human and Mouse
+  - Mapping: STAR
+  - Peak calling and downstream analysis: ChIPseeker, DESeq2, GO, ReactomePA
 
 ---
 
