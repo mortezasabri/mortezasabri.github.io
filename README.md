@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/ME.jpeg?raw=true" alt="Morteza Sabri" width="600"/>
+  <img src="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/ME.jpeg?raw=true" alt="Morteza Sabri" width="400"/>
 </p>
 
 # Morteza Sabri – Portfolio
