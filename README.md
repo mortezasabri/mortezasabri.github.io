@@ -44,7 +44,6 @@
   <a href="#contact">Contact</a>
 </p>
 
-
 ---
 
 ## 👨‍🔬 About Me
@@ -52,6 +51,15 @@ I am a geneticist by training and a bioinformatician by experience, with a stron
 Since 2017, I have worked on genomics and transcriptomics projects, combining biological insights with computational expertise.  
 Currently, I am seeking opportunities to advance my research career through a PhD position.
 
+---
+
+## 🔬 Research Interests
+
+- Transcriptomics (bulk and single-cell)
+- Multi-Omics Data Integration
+- Data-driven Biological Discovery
+- Computational Biology in Disease Modeling
+- 
 ---
 
 ## 🧠 Skills
@@ -144,6 +152,10 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 
 ---
 
+_Last updated: April 2025_
+
 <p align="center">
   <i>This portfolio is a curated selection of my bioinformatics work. I am open to collaborations and exciting new opportunities!</i>
 </p>
+
+![Visitor Count](https://komarev.com/ghpvc/?username=mortezasabri&color=blue)
