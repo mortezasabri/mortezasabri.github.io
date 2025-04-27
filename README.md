@@ -31,14 +31,14 @@ I am a geneticist by training and a bioinformatician by experience, with a stron
   - [View Project Repository]()
 
 - **Genome Assembly Collaboration**
-  - Participated in genome assembly and annotation of a fish species (_Gambusia Holbrooki_).
+  - Participated in genome assembly and annotation of the fish species _Gambusia holbrooki_.
   - Tools: SPAdes, QUAST.
 
 ---
 
 ## 🎤 Teaching & Workshops
-- **Bioinformatics Workshops**
-  - Instructor for "Introduction to R for Biologists" and "RNA-Seq Data Analysis" workshops.
+- **Bioinformatics Workshops**  
+  - Instructor for "Introduction to R for Biologists" and "RNA-Seq Data Analysis" workshops.  
   - Topics covered: Data wrangling, visualization, RNA-Seq pipeline basics.
 
 ---
@@ -50,11 +50,11 @@ I am a geneticist by training and a bioinformatician by experience, with a stron
 ---
 
 ## 📬 Contact
-- **Email**: morteza@example.com
+- **Email**: morteza_sabri@icloud.com
 - **LinkedIn**: [mortezasabri](https://www.linkedin.com/in/mortezasabri/)
 - **GitHub**: [mortezasabri](https://github.com/mortezasabri)
-- **GoogleScholar**: [mortezasabri](https://scholar.google.at/citations?user=KuzkDTcAAAAJ)
-- **OrcidID**: [0000-0001-6662-5984](https://orcid.org/0000-0001-6662-5984)
+- **Google Scholar**: [mortezasabri](https://scholar.google.at/citations?user=KuzkDTcAAAAJ)
+- **ORCID ID**: [0000-0001-6662-5984](https://orcid.org/0000-0001-6662-5984)
 
 ---
 
