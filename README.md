@@ -115,6 +115,7 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 ## 🎤 Teaching & Workshops
 - **Instructor:** "Introduction to R for Biologists" and "RNA-Seq Data Analysis" workshops.
 - **Topics Covered:** Data wrangling, visualization, RNA-Seq pipeline basics.
+[See the certificates](https://github.com/mortezasabri/mortezasabri.github.io/tree/main/certificates)
 
 ---
 
