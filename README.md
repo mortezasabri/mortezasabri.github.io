@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/Welcome%20to%20my-Portfolio-blueviolet?style=for-the-badge" alt="Welcome Badge" />
   <img src="https://img.shields.io/badge/Looking%20for-PhD%20opportunities-important?style=for-the-badge&logo=academia" alt="PhD Badge" />
   <a href="MortezaSabri_CV.pdf" download>
-    <img src="https://img.shields.io/badge/Download-CV-blueviolet?style=for-the-badge" alt="Download CV" />
+    <img src="https://img.shields.io/badge/📄%20Download-CV-blueviolet?style=for-the-badge" alt="Download CV" />
   </a>
 </p>
 
@@ -156,7 +156,7 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 
 <p align="center">
   <a href="MortezaSabri_CV.pdf" download>
-    <img src="https://img.shields.io/badge/Download-CV-blueviolet?style=for-the-badge" alt="Download CV" />
+    <img src="https://img.shields.io/badge/📄%20Download-CV-blueviolet?style=for-the-badge" alt="Download CV" />
   </a>
 </p>
 
