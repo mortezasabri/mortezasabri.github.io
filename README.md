@@ -151,7 +151,7 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 </p>
 
 <p align="center">
-  <a href="Morteza_Sabri_CV.pdf" download>
+  <a href="MortezaSabri_CV.pdf" download>
     <img src="https://img.shields.io/badge/Download-CV-blueviolet?style=for-the-badge" alt="Download CV" />
   </a>
 </p>
