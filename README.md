@@ -7,7 +7,7 @@
 
 <!-- Name and Title with Fade-in -->
 <div align="center">
-  <h1 style="animation: fadeIn 2s;">👨‍🔬 Morteza Sabri</h1>
+  <h1 style="animation: fadeIn 2s;">Morteza Sabri</h1>
   <h3 style="animation: fadeIn 3s;">Bioinformatician combining genomics, transcriptomics, and data science to uncover biological insights. Seeking PhD opportunities.</h3>
 </div>
 
