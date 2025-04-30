@@ -21,7 +21,7 @@
 ---
 
 ## 👨‍🔬 About Me
-I am a geneticist by training and a bioinformatician by experience, with a strong passion for exploring complex biological systems through data.  
+I am a biologist by training and a bioinformatician by experience, with a strong passion for exploring complex biological systems through data.  
 Since 2017, I have worked on genomics and transcriptomics projects, combining biological insights with computational expertise.  
 Currently, I am seeking opportunities to advance my research career through a PhD position.
 
