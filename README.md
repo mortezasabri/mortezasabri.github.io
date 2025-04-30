@@ -13,7 +13,7 @@
 
 <!-- Typing Animated Motto -->
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=14&pause=1000&color=darkblue&width=800&lines=Turning+data+into+discoveries%2C+one+dataset+at+a+time.;Exploring+complexity%2C+finding+meaning.;Where+biology+meets+computation+and+discovery+begins." alt="Typing Effect" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=12&pause=10&color=249797&width=800&lines=Turning+data+into+discoveries%2C+one+dataset+at+a+time.;Exploring+complexity%2C+finding+meaning.;Where+biology+meets+computation+and+discovery+begins." alt="Typing Effect" />
 </div>
 
 
