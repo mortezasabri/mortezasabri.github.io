@@ -18,18 +18,6 @@
 
 
 
-
-<!-- Table of Contents -->
-<p align="center">
-  <a href="#about-me">About Me</a> •
-  <a href="#skills">Skills</a> •
-  <a href="#selected-projects">Selected Projects</a> •
-  <a href="#highlighted-pipelines">Highlighted Pipelines</a> •
-  <a href="#teaching--workshops">Teaching & Workshops</a> •
-  <a href="#publications">Publications</a> •
-  <a href="#contact">Contact</a>
-</p>
-
 ---
 
 ## 👨‍🔬 About Me
