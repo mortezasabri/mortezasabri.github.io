@@ -5,17 +5,6 @@
 
 
 
-<!-- Welcome and PhD Badges -->
-<p align="center">
-  <img src="https://img.shields.io/badge/Welcome%20to%20my-Portfolio-blueviolet?style=for-the-badge" alt="Welcome Badge" />
-  <img src="https://img.shields.io/badge/Looking%20for-PhD%20opportunities-important?style=for-the-badge&logo=academia" alt="PhD Badge" />
-  <a href="MortezaSabri_CV.pdf" download>
-    <img src="https://img.shields.io/badge/📄%20Download-CV-blueviolet?style=for-the-badge" alt="Download CV" />
-  </a>
-</p>
-
-
-
 <!-- Name and Title with Fade-in -->
 <div align="center">
   <h1 style="animation: fadeIn 2s;">👨‍🔬 Morteza Sabri</h1>
@@ -24,17 +13,10 @@
 
 <!-- Typing Animated Motto -->
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=18&pause=1000&color=6A5ACD&width=800&lines=Turning+data+into+discoveries%2C+one+dataset+at+a+time.;Exploring+complexity%2C+finding+meaning.;Where+biology+meets+computation+and+discovery+begins." alt="Typing Effect" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=18&pause=1000&color=blue&width=800&lines=Turning+data+into+discoveries%2C+one+dataset+at+a+time.;Exploring+complexity%2C+finding+meaning.;Where+biology+meets+computation+and+discovery+begins." alt="Typing Effect" />
 </div>
 
 
-<!-- Fade-in Animation CSS -->
-<style>
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-</style>
 
 
 <!-- Table of Contents -->
