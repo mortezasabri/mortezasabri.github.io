@@ -21,9 +21,7 @@
 ---
 
 ## 👨‍🔬 About Me
-I am a biologist by training and a bioinformatician by experience, with a strong passion for exploring complex biological systems through data.  
-Since 2017, I have worked on genomics and transcriptomics projects, combining biological insights with computational expertise.  
-Currently, I am seeking opportunities to advance my research career through a PhD position.
+I am a biologist by training and a bioinformatician by experience, with a strong passion for exploring complex biological systems through data. Since 2017, I have worked on genomics and transcriptomics projects, combining biological insights with computational expertise. Currently, I am seeking opportunities to advance my research career through a PhD position.
 
 ---
 
@@ -34,6 +32,28 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 - Data-driven Biological Discovery
 - Computational Biology in Disease Modeling
 
+
+---
+
+## 📚 Selected Projects
+- **LookUp**  
+  An automated program for extracting all relevant information of a gene-of-interest in the context of an experiment. [Script](https://github.com/mortezasabri/mortezasabri.github.io/blob/main/scripts/lookup.Rmd)
+
+- **Bulk RNA-Seq Analysis and Visualization**  
+  Designed and optimized RNA-Seq pipelines for cardiovascular datasets using DESeq2, edgeR, and clusterProfiler.
+  
+- **Additional analysis for revised paper**  
+  Preformed multivariate integrative method ([MINT](https://doi.org/10.1186/s12859-017-1553-8)) of analysis to polish a [paper](https://www.nature.com/articles/s41598-021-92720-z) for Scientific Reports journal. [Results](https://github.com/mortezasabri/mortezasabri.github.io/blob/main/docs/mint.pdf)
+
+- **Single-cell RNA-Seq Data Integration**  
+  Processed and visualized scRNA-Seq data for disease modeling projects using Seurat and SingleCellExperiment.
+
+- **Methylation Array Analysis**  
+  Performed DNA methylation analysis on clinical postpartum depression samples using minfi and ChAMP. [Script](https://github.com/mortezasabri/mortezasabri.github.io/blob/main/scripts/methArray.R)
+
+- **Genome Assembly Collaboration**  
+  Participated in the genome assembly and annotation of the fish species _Gambusia holbrooki_ using SPAdes and QUAST.
+
 ---
 
 ## 🧠 Skills
@@ -42,21 +62,6 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 - **Data Analysis:** Statistical modeling, differential expression analysis, data visualization
 - **Platforms:** CLC Genomics Workbench, Galaxy, Jupyter Notebooks, Linux environments
 - **Wet Lab:** Basic molecular biology techniques
-
----
-
-## 📚 Selected Projects
-- **Bulk RNA-Seq Analysis and Visualization**  
-  Designed and optimized RNA-Seq pipelines for cardiovascular datasets using DESeq2, edgeR, and clusterProfiler.
-
-- **Single-cell RNA-Seq Data Integration**  
-  Processed and visualized scRNA-Seq data for disease modeling projects using Seurat and SingleCellExperiment.
-
-- **Methylation Array Analysis**  
-  Conducted DNA methylation analysis on clinical samples using minfi and ChAMP.
-
-- **Genome Assembly Collaboration**  
-  Participated in the genome assembly and annotation of the fish species _Gambusia holbrooki_ using SPAdes and QUAST.
 
 ---
 
@@ -90,7 +95,7 @@ Currently, I am seeking opportunities to advance my research career through a Ph
 - **Instructor:** "Introduction to R for Biologists" and "RNA-Seq Data Analysis" workshops.
 - **Topics Covered:** Data wrangling, visualization, RNA-Seq pipeline basics.
 
-[See the certificates](https://github.com/mortezasabri/mortezasabri.github.io/tree/main/certificates)
+[Certificates](https://github.com/mortezasabri/mortezasabri.github.io/tree/main/certificates) | [Materials](https://github.com/mortezasabri/mortezasabri.github.io/blob/main/docs/WhyR.pdf) | [YouTube](http://www.youtube.com/@bioinformatics-101)
 
 ---
 
