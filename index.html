@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morteza Sabri | Bioinformatician</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Navbar with inline TOC -->
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <a href="#" class="brand">Morteza Sabri</a>
+      <ul class="toc-inline">
+        <li><a href="#about">About</a></li>
+        <li><a href="#interests">Interests</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#pipelines">Pipelines</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#publications">Pubs</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="hero">
+    <div class="container">
+      <div class="banner"></div>
+    </div>
+  </header>
+
+  <!-- Hero Text -->
+  <div class="container hero-content">
+    <h1>Morteza Sabri</h1>
+    <p class="tagline">
+      Bioinformatician combining genomics, transcriptomics, and data science to uncover biological insights. Seeking PhD opportunities.
+    </p>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container main-content">
+
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>
+        I’m a biologist turned bioinformatician with a passion for translating complex omics datasets into actionable biological insights. Since 2017, I’ve developed and optimized pipelines for bulk and single-cell RNA sequencing, DNA methylation analysis, and genome assembly—combining hands-on wet-lab experience with advanced computational expertise. I thrive on collaborative projects that bridge experimental design and data-driven discovery, and I’m eager to advance my research through impactful PhD opportunities.
+      </p>
+    </section>
+
+    <section id="interests" class="section">
+      <h2>Research Interests</h2>
+      <ul>
+        <li>Transcriptomics (bulk and single-cell)</li>
+        <li>Multi-Omics Data Integration</li>
+        <li>Data-driven Biological Discovery</li>
+        <li>Computational Biology in Disease Modeling</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Selected Projects</h2>
+      <ul>
+        <li>
+          <strong>LookUp</strong>
+          <p class="project-desc">An automated program for extracting all relevant information of a gene-of-interest in the context of an experiment. <a href="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/scripts/lookup.Rmd">Script</a></p>
+        </li>
+        <li>
+          <strong>Bulk RNA-Seq Analysis and Visualization</strong>
+          <p class="project-desc">Designed and optimized RNA-Seq pipelines for cardiovascular datasets using DESeq2, edgeR, and clusterProfiler.</p>
+        </li>
+        <li>
+          <strong>Additional analysis for revised paper</strong>
+          <p class="project-desc">Performed multivariate integrative method (<a href="https://doi.org/10.1186/s12859-017-1553-8">MINT</a>) analysis to polish a <a href="https://www.nature.com/articles/s41598-021-92720-z">paper</a> for Scientific Reports journal. <a href="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/docs/mint.pdf">Results</a></p>
+        </li>
+        <li>
+          <strong>Single-cell RNA-Seq Data Integration</strong>
+          <p class="project-desc">Processed and visualized scRNA-Seq data for disease modeling projects using Seurat and SingleCellExperiment.</p>
+        </li>
+        <li>
+          <strong>Methylation Array Analysis</strong>
+          <p class="project-desc">Performed DNA methylation analysis on clinical postpartum depression samples using minfi and ChAMP. <a href="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/scripts/methArray.R">Script</a></p>
+        </li>
+        <li>
+          <strong>Genome Assembly Collaboration</strong>
+          <p class="project-desc">Participated in the genome assembly and annotation of the fish species <em>Gambusia holbrooki</em> using SPAdes and QUAST.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li><strong>Bioinformatics:</strong> Bulk &amp; scRNA-Seq, Methylation arrays, Genome assembly</li>
+        <li><strong>Languages:</strong> R (proficient), Shell (intermediate), Python (basic)</li>
+        <li><strong>Analysis:</strong> Statistical modeling, differential expression, visualization</li>
+        <li><strong>Tools:</strong> Bowtie2, STAR, Salmon, limma, Bioconductor</li>
+      </ul>
+    </section>
+
+    <section id="pipelines" class="section">
+      <h2>Highlighted Pipelines</h2>
+      <ul>
+        <li><strong>Bulk RNA-Seq</strong> — FASTQ → alignment (STAR) → quantification (Salmon) → DE analysis (DESeq2, edgeR) → functional enrichment (clusterProfiler)</li>
+        <li><strong>Single-cell RNA-Seq</strong> — 10x Genomics data → Seurat clustering → marker identification → visualization</li>
+        <li><strong>Genome Assembly</strong> — Velvet, SPAdes, Unicycler comparison; annotation with Prokka; quality check with QUAST</li>
+        <li><strong>Methylation Arrays</strong> — IDAT processing using ChAMP; differential methylation analysis with limma</li>
+      </ul>
+    </section>
+
+    <section id="teaching" class="section">
+      <h2>Teaching &amp; Workshops</h2>
+      <ul>
+        <li>“Introduction to R for Biologists” workshop covering R basics, data wrangling, and visualization.</li>
+        <li>“RNA-Seq Data Analysis” workshop (bulk &amp; single-cell) using Bioconductor packages.</li>
+      </ul>
+      <p>
+        <a href="https://github.com/mortezasabri/mortezasabri.github.io/tree/main/certificates">Certificates</a> • 
+        <a href="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/docs/WhyR.pdf">Materials</a> • 
+        <a href="http://www.youtube.com/@bioinformatics-101" target="_blank">YouTube</a>
+      </p>
+    </section>
+
+    <section id="publications" class="section">
+      <h2>Publications</h2>
+      <ul>
+        <li><a href="https://onlinelibrary.wiley.com/doi/10.1002/jcp.29216">Overcoming trastuzumab resistance in HER2-positive breast cancer</a> (Co-author)</li>
+        <li><a href="https://scholar.google.at/citations?view_op=view_citation&hl=de&user=KuzkDTcAAAAJ&citation_for_view=KuzkDTcAAAAJ:EkHepimYqZsC">Evaluation of monolignol biosynthesis gene network in Camelina sativa</a> (Co-author)</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="contact-icons">
+        <a href="mailto:morteza_sabri@icloud.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/mortezasabri" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/mortezasabri" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://scholar.google.at/" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+        <a href="https://orcid.org/" target="_blank" title="ORCID"><i class="fab fa-orcid"></i></a>
+      </div>
+      <a href="https://mortezasabri.github.io/MortezaSabri_CV.pdf" class="btn-cv" target="_blank"><i class="fas fa-file-download"></i> Download CV</a>
+    </section>
+
+    <footer class="footer">
+      <p>Last updated: April 2025</p>
+      <p>This portfolio is a curated selection of my bioinformatics and data science work. I am open to collaborations and new opportunities!</p>
+    </footer>
+
+  </main>
+</body>
+</html>
