@@ -1,6 +1,6 @@
 <!-- Big Panorama Banner -->
 <p align="center">
-  <img src="https://github.com/mortezasabri/mortezasabri.github.io/blob/main/banner.png?raw=true" alt="Banner" width="100%" />
+  <img src="./img/banner.jpeg?raw=true" alt="Banner" width="100%" />
 </p>
 
 
