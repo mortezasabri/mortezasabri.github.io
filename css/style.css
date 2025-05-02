@@ -56,9 +56,10 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
 .footer { text-align: center; padding: 2em 0; color: #777; font-size: 0.9em; }
 
 
-/* —— Mobile Improvements —— */
+
+/* — Mobile Layout Enhancements — */
 @media screen and (max-width: 768px) {
-  /* 1. Stack the navbar items */
+  /* 1. Stack the brand + TOC */
   .nav-flex {
     flex-direction: column;
     align-items: flex-start;
@@ -72,38 +73,39 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
     margin: 0 0.5em 0.5em 0;
   }
 
-  /* 2. Shrink the banner and tighten hero */
+  /* 2. Shrink banner and tighten hero padding */
   .banner {
-    height: 120px;   /* was 200px */
+    height: 120px;   /* down from 200px */
   }
   .hero-content {
-    padding: 1.5em 0;  /* was 2em */
+    padding: 1.5em 0; /* down from 2em */
   }
 
-  /* 3. Narrow container padding */
+  /* 3. Wider gutters but same font sizes */
   .container {
     width: 95%;
     padding: 0 1em;
   }
 
-  /* 4. Sections get a bit less padding */
+  /* 4. Lighter section padding */
   .section {
-    padding: 1.25em 1em;  /* was 2em */
+    padding: 1.25em 1em; /* down from 2em */
     margin-bottom: 1em;
   }
 
-  /* 5. Close up projects & indent slightly */
+  /* 5. Tighter project list */
   #projects ul li {
-    margin-bottom: 1em;  /* was 1.5em */
+    margin-bottom: 1em; /* down from 1.5em */
   }
   .project-desc {
-    margin-left: 1em;    /* was 1.5em */
+    margin-left: 1em;   /* from 1.5em */
     margin-top: 0.25em;
+    line-height: 1.3;
   }
 
-  /* 6. Tighten contact icons & full-width CV button */
+  /* 6. Smarter Contact & CV button */
   .contact-icons a {
-    font-size: 1.3em;    /* was 1.5em */
+    font-size: 1.3em;   /* from 1.5em */
     margin: 0.3em;
   }
   .btn-cv {
@@ -114,8 +116,8 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
     text-align: center;
   }
 
-  /* 7. Footer padding only */
+  /* 7. Gentle footer padding */
   .footer {
-    padding: 1.5em 1em;  /* was 2em 0 */
+    padding: 1.5em 1em; /* from 2em 0 */
   }
 }
