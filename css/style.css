@@ -54,3 +54,68 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
 
 /* Footer */
 .footer { text-align: center; padding: 2em 0; color: #777; font-size: 0.9em; }
+
+
+/* —— Mobile Improvements —— */
+@media screen and (max-width: 768px) {
+  /* 1. Stack the navbar items */
+  .nav-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75em 0;
+  }
+  .toc-inline {
+    margin-top: 0.5em;
+    flex-wrap: wrap;
+  }
+  .toc-inline li {
+    margin: 0 0.5em 0.5em 0;
+  }
+
+  /* 2. Shrink the banner and tighten hero */
+  .banner {
+    height: 120px;   /* was 200px */
+  }
+  .hero-content {
+    padding: 1.5em 0;  /* was 2em */
+  }
+
+  /* 3. Narrow container padding */
+  .container {
+    width: 95%;
+    padding: 0 1em;
+  }
+
+  /* 4. Sections get a bit less padding */
+  .section {
+    padding: 1.25em 1em;  /* was 2em */
+    margin-bottom: 1em;
+  }
+
+  /* 5. Close up projects & indent slightly */
+  #projects ul li {
+    margin-bottom: 1em;  /* was 1.5em */
+  }
+  .project-desc {
+    margin-left: 1em;    /* was 1.5em */
+    margin-top: 0.25em;
+  }
+
+  /* 6. Tighten contact icons & full-width CV button */
+  .contact-icons a {
+    font-size: 1.3em;    /* was 1.5em */
+    margin: 0.3em;
+  }
+  .btn-cv {
+    display: block;
+    width: 100%;
+    padding: 0.75em;
+    margin: 1em 0;
+    text-align: center;
+  }
+
+  /* 7. Footer padding only */
+  .footer {
+    padding: 1.5em 1em;  /* was 2em 0 */
+  }
+}
