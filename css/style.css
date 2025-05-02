@@ -125,4 +125,17 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
   .footer {
     padding: 1.5em 1em; /* from 2em 0 */
   }
+    
+  /* — Mobile Font Lock & Banner Tweak — */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    /* smaller banner on phones */
+    .banner {
+      height: 100px;  /* down from 200px */
+    }
+  }
 }
