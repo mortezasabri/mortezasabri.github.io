@@ -48,27 +48,47 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
 }
 .contact-icons a {
   margin: 0 0.5em;
-  font-size: 2em;   /* ↑ increased from 1.5em */
+  font-size: 2em;
   color: #0366d6;
 }
 
+/* CV Button */
+.btn-cv {
+  display: inline-block;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  background: #0366d6;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.btn-cv:hover { background: #024e91; }
 
+/* Footer */
+.footer { text-align: center; padding: 2em 0; color: #777; font-size: 0.9em; }
+
+/* Responsive (≤768px) */
 @media screen and (max-width: 768px) {
-  /* reduce base font size on mobile */
+  /* Text & banner */
   body { font-size: 14px !important; }
-
-  /* shrink banner further on phones */
   .banner { height: 80px !important; }
-
-  /* adjust hero text sizes */
   .hero-content h1 { font-size: 1.4em !important; }
   .hero-content .tagline { font-size: 0.9em !important; }
-
-  /* smaller TOC links */
   .toc-inline a { font-size: 0.9em !important; }
-
-  /* section headings smaller */
   .section h2 { font-size: 1.4em !important; }
+
+  /* Container & sections */
+  .container { width: 100%; padding: 0 1em; }
+  .section { padding: 1em; }
+
+  /* Experience table */
+  .experience-table th, .experience-table td { font-size: 14px; padding: 0.5em; }
+
+  /* Pipelines sub-list */
+  #pipelines ul ul { margin-left: 1em; }
+
+  /* Mobile nav: stack links */
+  .nav-flex { flex-direction: column; align-items: flex-start; }
+  .toc-inline { flex-direction: column; width: 100%; padding: 0.5em 0; }
+  .toc-inline li { margin: 0.25em 0; }
 }
-
-
