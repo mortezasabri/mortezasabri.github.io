@@ -26,39 +26,39 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
 .section h2 { margin-bottom: 0.5em; color: #222; }
 .section ul { list-style: disc inside; }
 
+/* Experience Table Styles */
+.experience-table { width: 100%; border-collapse: collapse; margin: 1.5em 0; table-layout: fixed; }
+.experience-table th, .experience-table td { border: 1px solid #ddd; padding: 0.75em; text-align: left; word-break: break-word; }
+.experience-table th { background: #f5f5f5; }
+.experience-table tr:nth-child(even) { background: #fafafa; }
+
 /* Projects Spacing & Indentation */
 #projects ul li { margin-bottom: 1.5em; }
 .project-desc { margin-left: 1.5em; margin-top: 0.25em; line-height: 1.2; }
 
+/* Highlighted Pipelines Indentation */
+#pipelines ul > li { margin-bottom: 2em; }
+#pipelines ul ul { margin-top: 0; margin-left: 1.5em; }
+#pipelines ul ul li { margin-bottom: 0.25em; }
+
 /* Contact Icons */
-.contact-icons { text-align: center; margin: 1em 0; }
-.contact-icons a { margin: 0 0.5em; font-size: 1.5em; color: #0366d6; }
-.contact-icons a:hover { color: #024e91; }
-
-/* CV Button */
-.btn-cv { display: inline-block; margin: 1em 0; padding: 0.5em 1em; background: #0366d6; color: #fff; border-radius: 4px; text-decoration: none; }
-.btn-cv:hover { background: #024e91; }
-
-/* Footer */
-.footer { text-align: center; padding: 2em 0; color: #777; font-size: 0.9em; }
-
-/* — Mobile Font Lock & Banner Tweak — */
-html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+.contact-icons {
+  text-align: center;
+  margin: 1em 0;
+}
+.contact-icons a {
+  margin: 0 0.5em;
+  font-size: 2em;   /* ↑ increased from 1.5em */
+  color: #0366d6;
+}
 
 @media screen and (max-width: 768px) {
-  /* reduce base font size on mobile */
   body { font-size: 14px !important; }
-
-  /* shrink banner further on phones */
   .banner { height: 80px !important; }
-
-  /* adjust hero text sizes */
   .hero-content h1 { font-size: 1.4em !important; }
   .hero-content .tagline { font-size: 0.9em !important; }
-
-  /* smaller TOC links */
   .toc-inline a { font-size: 0.9em !important; }
-
-  /* section headings smaller */
   .section h2 { font-size: 1.4em !important; }
+  .experience-table th, .experience-table td { font-size: 14px; padding: 0.5em; }
+  #pipelines ul ul { margin-left: 1em; }
 }
