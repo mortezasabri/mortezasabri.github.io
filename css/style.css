@@ -70,28 +70,25 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
 
 
 /* Responsive (≤768px) */
-/* catch phones in both portrait & landscape */
 @media 
-  screen and (max-width: 768px),            /* narrow viewports */
-  only screen and (max-device-width: 768px) /* phones by device width */ 
+  screen and (max-width: 768px),
+  only screen and (max-device-width: 768px)
 {
-  /* all your existing mobile rules here */
-  body { font-size: 14px !important; }
-  .banner { height: 80px !important; }
-  .hero-content h1 { font-size: 1.4em !important; }
-  .hero-content .tagline { font-size: 0.9em !important; }
-  .toc-inline a { font-size: 0.9em !important; }
-  .section h2 { font-size: 1.4em !important; }
+  /* …other mobile rules… */
 
-  .container { width: 100%; padding: 0 1em; }
-  .section { padding: 1em; text-align: center; }
-  .section ul { display: inline-block; text-align: left; }
-
-  .experience-table th, .experience-table td { font-size: 14px; padding: 0.5em; }
-  #pipelines ul ul { margin-left: 1em; }
-
-  /* stack the nav on phones */
-  .nav-flex { flex-direction: column; align-items: flex-start; }
-  .toc-inline { flex-direction: column; width: 100%; padding: 0.5em 0; }
-  .toc-inline li { margin: 0.25em 0; }
+  /* Restore inline nav and enable horizontal scroll */
+  .nav-flex {
+    flex-direction: row;       /* back to row layout */
+    justify-content: space-between;
+  }
+  .toc-inline {
+    flex-direction: row;       /* inline items, not stacked */
+    overflow-x: auto;          /* allow scrolling if too wide */
+    white-space: nowrap;       /* keep all links on one line */
+    padding: 0.5em 0;
+  }
+  .toc-inline li {
+    display: inline-block;
+    margin: 0 0.75em;          /* spacing between links */
+  }
 }
