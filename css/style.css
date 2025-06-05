@@ -67,7 +67,13 @@ body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background
 /* Footer */
 .footer { text-align: center; padding: 2em 0; color: #777; font-size: 0.9em; }
 
-
+/* BSky Icon */
+.bsky-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
 
 /* Responsive (≤768px) */
 
