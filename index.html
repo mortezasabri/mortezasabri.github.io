@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+  <div class="orb-mid"></div>
   <!-- Navbar with inline TOC -->
   <nav class="navbar">
     <div class="container nav-flex">
@@ -38,14 +39,56 @@
 
   <!-- Hero Text -->
   <div class="container hero-content">
-    <h1>Morteza Sabri</h1>
+    <p class="hero-eyebrow">Morteza Sabri</p>
+    <h1>Clinical<br><span class="hero-teal">Bioinformatician.</span></h1>
     <p class="tagline">
-      Clinical Bioinformatician · Computational Oncology · NGS Pipeline Engineer
+      Building clinical cancer genomics infrastructure for Molecular Tumor Boards<br>at Universitätsmedizin Greifswald.
     </p>
   </div>
 
   <!-- Main Content -->
   <main class="container main-content">
+
+    <!-- Summary Grid -->
+    <div class="summary-grid">
+      <div class="glass-card wide">
+        <div class="card-label">About</div>
+        <h3>Biologist turned Pipeline Engineer</h3>
+        <p>Currently working on MIRACUM-Pipe, TSO500 somatic variant automation, methylome-based glioblastoma classification, and AI-assisted MTB evidence aggregation — in collaboration with University Medical Center Rostock.</p>
+      </div>
+
+      <div class="glass-card">
+        <div class="card-label">Current Role</div>
+        <h3>Universitätsmedizin Greifswald</h3>
+        <p class="card-date">Oct 2025 – Present</p>
+        <p>Institute of Molecular Genomics &amp; Institute of Bioinformatics</p>
+      </div>
+
+      <div class="glass-card">
+        <div class="card-label">Tech Stack</div>
+        <div class="tag-cloud">
+          <span class="glass-tag">R</span>
+          <span class="glass-tag">Nextflow</span>
+          <span class="glass-tag">Docker</span>
+          <span class="glass-tag">Python</span>
+          <span class="glass-tag">Bash</span>
+          <span class="glass-tag">ICA CLI</span>
+          <span class="glass-tag">TSO500</span>
+          <span class="glass-tag">Seurat</span>
+          <span class="glass-tag">DESeq2</span>
+        </div>
+      </div>
+
+      <div class="glass-card wide">
+        <div class="card-label">Current Work</div>
+        <ul>
+          <li>Enhancement of MIRACUM-Pipe (WES somatic variant pipeline) — Greifswald × Rostock</li>
+          <li>TSO500 somatic panel automation on Illumina ICA/ICI</li>
+          <li>Methylome-based glioblastoma subgroup classification</li>
+          <li>AI-assisted oncogenic evidence aggregation for MTB reporting</li>
+        </ul>
+      </div>
+    </div>
 
     <!-- About Me -->
     <section id="about" class="section">
@@ -153,6 +196,32 @@
     <section id="pipelines" class="section">
       <h2>Highlighted Pipelines</h2>
       <ul>
+        <li><strong>WES Somatic Variant Analysis (MIRACUM-Pipe)</strong>
+          <ul>
+            <li>Input: paired tumor/normal FASTQ files (Illumina WES)</li>
+            <li>Alignment: BWA-MEM; duplicate marking: Picard/GATK</li>
+            <li>Variant calling: SNV/InDel (Mutect2, VarScan2), CNV (CNVkit), LoH detection</li>
+            <li>Annotation: ANNOVAR, CIViC, OncoKB, functional prediction databases</li>
+            <li>Output: automated clinical PDF report for Molecular Tumor Board; collaboration with University Medical Center Rostock</li>
+          </ul>
+        </li>
+        <li><strong>TSO500 Somatic Panel (Illumina ICA/ICI Automation)</strong>
+          <ul>
+            <li>Input: FASTQ files from TSO500 targeted somatic panel (DNA + RNA)</li>
+            <li>Sample sheet validation and automated ICA/ICI workflow submission via CLI</li>
+            <li>DRAGEN TSO500 pipeline: SNV/InDel, CNV, TMB, MSI, gene fusions</li>
+            <li>QC filtering (coverage thresholds, contamination checks) and audit tracking</li>
+            <li>Output: structured variant reports for clinical MTB review</li>
+          </ul>
+        </li>
+        <li><strong>Methylome Classification (Glioblastoma Subgroups)</strong>
+          <ul>
+            <li>Input: raw IDAT files (Illumina EPIC/450k arrays) from brain tumor samples</li>
+            <li>Preprocessing: minfi / ChAMP (normalization, QC, batch correction)</li>
+            <li>Classification: reference-based methylation classifier (Heidelberg CNS classifier)</li>
+            <li>Output: subgroup assignment and copy number profile for clinical reporting</li>
+          </ul>
+        </li>
         <li><strong>Bulk RNA-Seq (and polyA/ncRNA-Seq)</strong>
           <ul>
             <li>Input: raw FASTQ files (Illumina) from Human (AAA, Plaque samples), Mouse, and mini-Pig</li>
@@ -233,7 +302,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Last updated: November 2025</p>
+      <p>Last updated: June 2026</p>
       <p>This portfolio is a curated selection of my bioinformatics and data science work. I am open to collaborations and new opportunities!</p>
     </footer>
   </main>
