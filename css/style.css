@@ -5,38 +5,44 @@ body {
   font-family: 'Inter', Arial, sans-serif;
   line-height: 1.6;
   color: #e6edf3;
+  background: #020c1b;
+}
+
+/* Fixed background layer — keeps backdrop-filter working */
+.bg-layer {
+  position: fixed;
+  inset: 0;
   background: linear-gradient(135deg, #020c1b 0%, #0a192f 55%, #051b2c 100%);
-  background-attachment: fixed;
-  min-height: 100vh;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Glowing orbs */
-body::before {
-  content: '';
+.orb {
   position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 {
   width: 800px; height: 800px;
   background: radial-gradient(circle, rgba(45,212,191,0.15), transparent 65%);
   top: -250px; left: -200px;
-  pointer-events: none; z-index: 0;
 }
-body::after {
-  content: '';
-  position: fixed;
+.orb-2 {
   width: 700px; height: 700px;
   background: radial-gradient(circle, rgba(88,166,255,0.12), transparent 65%);
   bottom: -150px; right: -150px;
-  pointer-events: none; z-index: 0;
 }
-.orb-mid {
-  position: fixed;
+.orb-3 {
   width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(139,92,246,0.07), transparent 65%);
   top: 40%; left: 55%;
-  pointer-events: none; z-index: 0;
 }
 
-/* Layout */
-.container { width: 90%; max-width: 1100px; margin: auto; position: relative; z-index: 1; }
+/* Layout — sit above bg-layer and orbs */
+.navbar, .hero, .hero-content, .main-content, .footer { position: relative; z-index: 1; }
+.container { width: 90%; max-width: 1100px; margin: auto; }
 .main-content { padding-bottom: 3em; }
 
 /* Navbar */
