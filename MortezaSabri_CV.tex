@@ -1,0 +1,341 @@
+%% Morteza Sabri — Curriculum Vitae
+%% Compile with: pdflatex MortezaSabri_CV.tex
+
+\documentclass[10pt, a4paper]{article}
+
+\usepackage[margin=1.4cm, top=0.9cm, bottom=0.9cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+
+% ── Accent color (matches portfolio teal) ──
+\definecolor{accent}{RGB}{0, 112, 192}
+
+% ── Section headings ──
+\titleformat{\section}
+  {\color{accent}\bfseries\normalsize}
+  {}{0em}{\MakeUppercase}
+  [\color{accent}\vspace{-4pt}\rule{\linewidth}{0.6pt}]
+\titlespacing{\section}{0pt}{4pt}{1pt}
+
+% ── Hyperlinks ──
+\hypersetup{
+  colorlinks = true,
+  urlcolor   = accent,
+  linkcolor  = accent,
+  pdfauthor  = {Morteza Sabri},
+  pdftitle   = {Morteza Sabri — CV}
+}
+
+% ── List style ──
+\setlist[itemize]{
+  leftmargin = 1.2em,
+  itemsep    = 0pt,
+  parsep     = 0pt,
+  topsep     = 1pt,
+  label      = \textbullet
+}
+
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+
+\pagestyle{empty}
+
+% ── Convenience commands ──
+% \cventry{Dates}{Title}{Institution}{Location}{Bullets...}
+\newcommand{\cventry}[4]{%
+  \noindent
+  \textbf{#2} \textbar\ #3, #4 \hfill \textit{#1}\par\vspace{0pt}
+}
+
+\begin{document}
+
+% ════════════════════════════════════════════
+%  HEADER
+% ════════════════════════════════════════════
+\begin{center}
+  {\LARGE\bfseries Morteza Sabri}\\[3pt]
+  \href{mailto:morteza.sabri@uni-greifswald.com}{morteza.sabri@uni-greifswald.com}
+  \textbar\ Greifswald, Germany \\[1pt]
+  \href{https://mortezasabri.github.io}{Portfolio}
+  \textbar\ \href{https://www.linkedin.com/in/mortezasabri}{LinkedIn}
+  \textbar\ \href{https://github.com/mortezasabri}{GitHub}
+  \textbar\ \href{https://scholar.google.at/citations?user=KuzkDTcAAAAJ}{Google Scholar}
+  \textbar\ \href{https://orcid.org/0000-0001-6662-5984}{ORCID}
+\end{center}
+
+\vspace{1pt}
+
+% ════════════════════════════════════════════
+%  PROFESSIONAL SUMMARY
+% ════════════════════════════════════════════
+\section{Professional Summary}
+
+Clinical Bioinformatician (M.Sc.\ Biology, Genetics) with expertise in cancer genomics, NGS pipeline
+engineering, and Molecular Tumor Board (MTB) infrastructure. Currently at Universit\"atsmedizin
+Greifswald, enhancing and maintaining \textbf{MIRACUM-Pipe} (WES somatic variant pipeline) in
+collaboration with University Medical Center Rostock, automating TSO500 somatic panel workflows on
+Illumina ICA/ICI, and developing methylome-based glioblastoma classification pipelines. Extensive R
+programming experience since 2017 with proven expertise in bulk and single-cell transcriptomics,
+methylation arrays, and reproducible pipeline development. Author of
+\href{https://github.com/mortezasabri/goiExplorer}{\textbf{goiExplorer}}, an R package for interactive
+gene-of-interest exploration.
+
+% ════════════════════════════════════════════
+%  HIGHLIGHTED AREAS OF EXPERTISE
+% ════════════════════════════════════════════
+\section{Highlighted Areas of Expertise}
+
+\begin{tabular}{@{}ll@{}}
+  \textbullet\ Clinical cancer genomics \& computational oncology &
+  \textbullet\ R programming \& shell scripting \\
+  \textbullet\ Bulk \& single-cell RNA-Seq                        &
+  \textbullet\ Workflow automation (Nextflow, Docker, ICA CLI) \\
+  \textbullet\ Methylome analysis \& epigenomics                  &
+  \textbullet\ Data visualization \& reproducibility \\
+  \textbullet\ MTB infrastructure \& somatic variant analysis     &
+  \textbullet\ Study design \& data interpretation \\
+\end{tabular}
+
+% ════════════════════════════════════════════
+%  EXPERIENCE
+% ════════════════════════════════════════════
+\section{Experience}
+
+\cventry{Oct 2025 -- Present}
+  {Scientific Staff, Bioinformatician}
+  {Universit\"atsmedizin Greifswald}
+  {Greifswald}
+\begin{itemize}
+  \item Enhancement and maintenance of MIRACUM-Pipe (WES somatic variant pipeline: SNV/InDel/CNV/LoH)
+        in collaboration with University Medical Center Rostock for clinical MTB use
+  \item Automation of TSO500 somatic panel workflows on Illumina ICA/ICI (sample sheet validation,
+        DRAGEN pipeline, QC filtering, audit tracking)
+  \item Methylome-based glioblastoma subgroup classification using EPIC arrays and Heidelberg CNS classifier
+  \item AI-assisted oncogenic evidence aggregation for Molecular Tumor Board reporting
+  \item Institutes: Institute of Molecular Genomics \& Institute of Bioinformatics
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{Jan 2025 -- Apr 2025}
+  {Scientific Staff, Bioinformatician}
+  {RWTH Aachen University}
+  {Aachen}
+\begin{itemize}
+  \item Performed single-cell RNA-Seq analysis to study neuron migration in the absence of DNMT1
+  \item Conducted methylation array data analysis on 64 subjects with postpartum depression
+  \item Handled data preprocessing (Parse Bioscience's Trailmaker), statistical analysis, and visualization
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{Nov 2023 -- Nov 2024}
+  {Scientific Staff, Bioinformatician}
+  {Technical University of Munich}
+  {Munich}
+\begin{itemize}
+  \item Conducted bulk and single-cell RNA-Seq analyses for cardiovascular research
+  \item Managed workflows from raw data to functional interpretation and identifying new biomarkers
+  \item Generated publication-ready visualizations illustrating gene-disease associations
+  \item Optimized preprocessing pipelines with R/Shell scripting, reducing runtime up to 80\%
+  \item Performed deconvolution analysis using BayesPrism R package to elucidate cell-type composition
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{Oct 2024}
+  {Visiting Scientist}
+  {Helmholtz Munich}
+  {Munich}
+\begin{itemize}
+  \item Conducted deconvolution analysis on scRNA-Seq data
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{2019 -- 2023}
+  {Instructor \& Freelance Bioinformatician}
+  {Self-Employed}
+  {Tehran}
+\begin{itemize}
+  \item Delivered over 10 onsite workshops on R programming, RNA-Seq, and Linux/Shell scripting
+  \item Provided freelance bioinformatics services including RNA-Seq, epigenomics, and visualization
+  \item Supported manuscript revisions by performing advanced statistical analyses (e.g., MINT)
+  \item Hosted \textit{Biocast101} podcast (Apple, Spotify, Castbox, PodLink)
+  \item Created content on social media as \textit{Bioinformatics101} (YouTube, Instagram, etc.)
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{2020 -- 2022}
+  {Compulsory Military Service}
+  {Department of Defense}
+  {Tehran}
+\begin{itemize}
+  \item Sampled blood and oral swabs (COVID-19), performing CBC diagnostics
+  \item Managed patient reception, communication, and scheduling
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{2019 -- 2020}
+  {Research Assistant}
+  {National Institute of Genetic Engineering and Biotechnology (NIGEB)}
+  {Tehran}
+\begin{itemize}
+  \item Produced publication-quality visualizations (heatmaps, volcano plots) to support manuscript figures
+  \item Co-authored a peer-reviewed article on monolignol biosynthesis in \textit{Camelina sativa}
+  \item Conducted bulk RNA-Seq analyses on \textit{Camelina sativa}
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{2017 -- 2019}
+  {Graduate Researcher}
+  {University of Sistan and Baluchestan}
+  {Zahedan}
+\begin{itemize}
+  \item Designed and executed qRT-PCR experiments comparing drought responses in two grapevine cultivars
+  \item Performed statistical analyses and produced publication-quality visualizations
+  \item Authored grant proposals on drought-stress gene-expression profiling and medicinal plant genomics
+  \item Lead-authored Master's thesis on drought-stress gene expression, overseeing study design and
+        data interpretation
+  \item Supervised two cohorts of B.Sc.\ students on \textit{Drosophila melanogaster} genetics projects
+  \item Analyzed publicly available bulk RNA-Seq and miRNA-Seq datasets to identify stress-responsive genes
+  \item Co-authored a peer-reviewed article on trastuzumab resistance in HER2-positive breast cancer
+\end{itemize}
+
+% ════════════════════════════════════════════
+%  SKILLS
+% ════════════════════════════════════════════
+\section{Skills}
+
+\begin{tabular}{@{}>{\bfseries}p{4.5cm}p{11.5cm}@{}}
+  Lab Techniques       & RNA/DNA isolation, PCR/qRT-PCR, primer design and optimization, electrophoresis \\[0pt]
+  Programming          & R (proficient), Python (basic), MATLAB (basic), Shell/Bash, Git/GitHub, \LaTeX, Markdown \\[0pt]
+  Infrastructure       & Nextflow, Docker/Singularity, Illumina ICA/ICI CLI, workflow automation \\[0pt]
+  Bioinformatics       & Bulk RNA-Seq, scRNA-Seq, methylation arrays, TSO500 somatic panel, WES (MIRACUM-Pipe),
+                         somatic variant calling \& annotation \\[0pt]
+  Software             & CLC Genomics Workbench, Galaxy, SPSS, JupyterLab, Trailmaker, VS Code \\[0pt]
+  HPC Platforms        & Sherlock cluster (Stanford University), RWTH Aachen cluster, Greifswald HPC \\[0pt]
+  Transferable Skills  & Scientific writing, teaching \& mentoring, workshop design \& delivery,
+                         open science \& reproducibility, FAIR data management, teamwork \& communication \\
+\end{tabular}
+
+% ════════════════════════════════════════════
+%  EDUCATION
+% ════════════════════════════════════════════
+\section{Education}
+
+\cventry{2015 -- 2019}
+  {M.Sc.\ Biology (Genetics)}
+  {University of Sistan and Baluchestan}
+  {Iran}
+\begin{itemize}
+  \item Thesis: ``Investigation of Superoxide Dismutase and Catalase Gene Expression under Drought Stress:
+        A Comparative Study between Sistan and Baluchestan and Moderate Cultivars''
+\end{itemize}
+
+\vspace{1pt}
+
+\cventry{2011 -- 2014}
+  {B.Sc.\ Cellular and Molecular Biology (Genetics)}
+  {Islamic Azad University}
+  {Iran}
+
+% ════════════════════════════════════════════
+%  CERTIFICATIONS & LANGUAGES
+% ════════════════════════════════════════════
+\section{Certifications \& Languages}
+
+\noindent\textbf{Languages:} Persian (Native), English (Proficient), Azeri (Basic)
+
+% ════════════════════════════════════════════
+%  PUBLICATIONS
+% ════════════════════════════════════════════
+\section{Publications}
+
+\begin{itemize}
+  \item Overcoming trastuzumab resistance in HER2-positive breast cancer.
+        \textit{Journal of Cellular Physiology}, 2019.
+        \href{https://doi.org/10.1002/jcp.29216}{DOI: 10.1002/jcp.29216}
+
+  \item Evaluation of monolignol biosynthesis gene network in \textit{Camelina sativa}.
+        \textit{Agricultural Biotechnology Journal}, 2020.
+
+  \item Investigation of Superoxide Dismutase and Catalase Gene Expression under Drought Stress:
+        A Comparative Study between Sistan and Baluchestan and Moderate Cultivars.
+        \textit{(Manuscript in preparation)}
+\end{itemize}
+
+% ════════════════════════════════════════════
+%  TEACHING EXPERIENCE
+% ════════════════════════════════════════════
+\section{Teaching Experience}
+
+\noindent\textbf{Workshops:} R \& Linux/Shell programming, RNA-Seq analysis, Visualization and
+basic statistics in R, Introduction to R for Biologists.\\
+See \href{https://mortezasabri.github.io/#teaching}{portfolio} for details.
+
+% ════════════════════════════════════════════
+%  HIGHLIGHTED PIPELINES
+% ════════════════════════════════════════════
+\section{Highlighted Pipelines}
+
+\begin{itemize}
+  \item WES Somatic Variant Analysis --- MIRACUM-Pipe
+        (BWA-MEM $\rightarrow$ Mutect2/VarScan2/CNVkit $\rightarrow$ ANNOVAR/CIViC $\rightarrow$ MTB PDF report)
+  \item TSO500 Somatic Panel --- Illumina ICA/ICI automation
+        (Sample sheet validation $\rightarrow$ DRAGEN $\rightarrow$ QC $\rightarrow$ clinical variant report)
+  \item Methylome Classification --- Glioblastoma subgroups
+        (IDAT $\rightarrow$ minfi/ChAMP $\rightarrow$ Heidelberg CNS classifier $\rightarrow$ subgroup report)
+  \item Bulk RNA-Seq / polyA / ncRNA-Seq
+        (STAR/HISAT2/Salmon $\rightarrow$ DESeq2/edgeR/limma $\rightarrow$ GO/KEGG/ReactomePA)
+  \item scRNA-Seq --- cell and nuclei
+        (10x Genomics / Parse Biosciences $\rightarrow$ Seurat/SingleCellExperiment $\rightarrow$ clustering/DE/deconvolution)
+  \item Epigenomic arrays
+        (IDAT $\rightarrow$ minfi/ChAMP $\rightarrow$ DM analysis $\rightarrow$ GO/KEGG)
+  \item Genome assembly
+        (Illumina FASTQ $\rightarrow$ Velvet/SPAdes $\rightarrow$ QUAST scaffold assessment)
+\end{itemize}
+
+See \href{https://mortezasabri.github.io/#pipelines}{portfolio} for details.
+
+% ════════════════════════════════════════════
+%  SOFTWARE DEVELOPMENTS
+% ════════════════════════════════════════════
+\section{Software Developments}
+
+\noindent\textbf{MIRACUM-Pipe} (maintenance \& clinical adaptation) ---
+\href{https://github.com/AG-Boerries/MIRACUM-Pipe}{github.com/AG-Boerries/MIRACUM-Pipe}
+\begin{itemize}
+  \item WES somatic variant pipeline originally developed by AG Boerries (University Medical Center Freiburg);
+        maintaining and adapting for the MTBs and CCCs at Universit\"atsmedizin Greifswald and
+        University Medical Center Rostock (QC tuning, reporting modules, institutional workflow integration)
+\end{itemize}
+
+\vspace{1pt}
+
+\noindent\textbf{goiExplorer} (R package) ---
+\href{https://github.com/mortezasabri/goiExplorer}{github.com/mortezasabri/goiExplorer}
+\begin{itemize}
+  \item R package for interactive gene-of-interest exploration from count matrices or Salmon
+        (quant.sf) outputs, with built-in plotting functions, full documentation, and unit tests
+\end{itemize}
+
+% ════════════════════════════════════════════
+%  REFERENCES
+% ════════════════════════════════════════════
+\section{References}
+
+\noindent References available upon request.
+
+\end{document}
