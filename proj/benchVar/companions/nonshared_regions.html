@@ -1,0 +1,425 @@
+<title>The ground they don't share — panel-only vs exome-only territory (HG002)</title>
+<style>
+  :root{
+    --bg:#F1F4F3; --surface:#FFFFFF; --surface-2:#F8FAF9;
+    --ink:#152322; --ink-2:#46534F; --ink-3:#727E7B;
+    --line:#E3E8E6; --line-2:#EEF1F0;
+    --tso:#1E78B4; --wes:#B86E0A; --both:#1F8F5C; --neither:#73828A;
+    --good:#1F8F5C; --caveat:#AF4E45; --tint:#0C6E6A;
+    --tso-wash:rgba(30,120,180,.08); --wes-wash:rgba(184,110,10,.10);
+    --good-wash:rgba(31,143,92,.10); --caveat-wash:rgba(175,78,69,.09);
+    --shadow:0 1px 2px rgba(20,40,38,.05),0 10px 30px -16px rgba(20,40,38,.16);
+    --shadow-sm:0 1px 2px rgba(20,40,38,.06);
+    --serif:"Charter","Bitstream Charter","Sitka Text",Cambria,"Iowan Old Style",Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0C1110; --surface:#151D1B; --surface-2:#121917;
+      --ink:#E9EEEC; --ink-2:#A9B4B1; --ink-3:#79847F;
+      --line:#28312F; --line-2:#1E2624;
+      --tso:#3E8AC0; --wes:#C4842E; --both:#33A070; --neither:#8494A0;
+      --good:#33A070; --caveat:#D0807A; --tint:#4FB3AD;
+      --tso-wash:rgba(62,138,192,.14); --wes-wash:rgba(196,132,46,.15);
+      --good-wash:rgba(51,160,112,.14); --caveat-wash:rgba(208,128,122,.13);
+      --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 34px -18px rgba(0,0,0,.7);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F1F4F3;--surface:#FFFFFF;--surface-2:#F8FAF9;--ink:#152322;--ink-2:#46534F;--ink-3:#727E7B;
+    --line:#E3E8E6;--line-2:#EEF1F0;--tso:#1E78B4;--wes:#B86E0A;--both:#1F8F5C;--neither:#73828A;
+    --good:#1F8F5C;--caveat:#AF4E45;--tint:#0C6E6A;--tso-wash:rgba(30,120,180,.08);--wes-wash:rgba(184,110,10,.10);
+    --good-wash:rgba(31,143,92,.10);--caveat-wash:rgba(175,78,69,.09);
+    --shadow:0 1px 2px rgba(20,40,38,.05),0 10px 30px -16px rgba(20,40,38,.16);--shadow-sm:0 1px 2px rgba(20,40,38,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1110;--surface:#151D1B;--surface-2:#121917;--ink:#E9EEEC;--ink-2:#A9B4B1;--ink-3:#79847F;
+    --line:#28312F;--line-2:#1E2624;--tso:#3E8AC0;--wes:#C4842E;--both:#33A070;--neither:#8494A0;
+    --good:#33A070;--caveat:#D0807A;--tint:#4FB3AD;--tso-wash:rgba(62,138,192,.14);--wes-wash:rgba(196,132,46,.15);
+    --good-wash:rgba(51,160,112,.14);--caveat-wash:rgba(208,128,122,.13);
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 34px -18px rgba(0,0,0,.7);--shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  .wide{max-width:1080px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;letter-spacing:-.01em;line-height:1.12;margin:0}
+  h2{font-size:clamp(1.5rem,3.3vw,2.05rem);margin:0 0 .2em}
+  h3{font-size:1.18rem;line-height:1.25;margin:0}
+  p{margin:0 0 1em}
+  a{color:var(--tint);text-underline-offset:2px;text-decoration-thickness:1px}
+  strong{font-weight:650;color:var(--ink)}
+  .mono{font-family:var(--mono)}
+  .tnum{font-variant-numeric:tabular-nums}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+  .lede{font-size:1.18rem;line-height:1.55;color:var(--ink-2)}
+  .muted{color:var(--ink-3)}
+  .small{font-size:.82rem;line-height:1.5}
+  section{padding:clamp(40px,7vw,72px) 0;border-top:1px solid var(--line-2)}
+  section:first-of-type{border-top:0}
+  .kicker{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .kicker .num{font-family:var(--mono);font-size:.7rem;color:var(--tint);border:1px solid var(--line);border-radius:100px;padding:3px 9px;letter-spacing:.05em}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm);padding:clamp(18px,3vw,28px)}
+  .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.04em;
+    padding:4px 10px;border-radius:100px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface-2);white-space:nowrap}
+  .chip.tso{color:var(--tso);border-color:color-mix(in srgb,var(--tso) 40%,var(--line))}
+  .chip.wes{color:var(--wes);border-color:color-mix(in srgb,var(--wes) 40%,var(--line))}
+  .chip.good{color:var(--good);border-color:color-mix(in srgb,var(--good) 42%,var(--line));background:var(--good-wash)}
+
+  /* header */
+  header.hero{padding-top:clamp(44px,7vw,84px)}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;
+    font-family:var(--mono);font-size:.72rem;color:var(--ink-3);letter-spacing:.04em}
+  .brandmark{display:flex;align-items:center;gap:9px;color:var(--ink-2);font-weight:600}
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--tso),var(--wes))}
+  .toggle{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+    background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:6px 13px;cursor:pointer}
+  .toggle:hover{border-color:var(--ink-3);color:var(--ink)}
+  h1{font-size:clamp(2.05rem,5.2vw,3.3rem);margin:.18em 0 .32em}
+  .heroline{color:var(--tso)} .heroline.b{color:var(--wes)}
+  .metastrip{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .metastrip .chip{background:var(--surface)}
+  .hero-rule{height:3px;margin-top:30px;border-radius:3px;background:linear-gradient(90deg,var(--tso) 0 50%,var(--wes) 50% 100%)}
+
+  /* stat grid */
+  .statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .stat{position:relative;border-radius:14px;padding:20px 20px 18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden}
+  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--neither)}
+  .stat.tso::before{background:var(--tso)} .stat.wes::before{background:var(--wes)} .stat.both::before{background:var(--both)}
+  .stat .lab{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--ink-2);text-transform:uppercase}
+  .stat .big{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums;font-size:clamp(1.8rem,4.4vw,2.5rem);line-height:1;margin:11px 0 3px;letter-spacing:-.02em}
+  .stat.tso .big{color:var(--tso)} .stat.wes .big{color:var(--wes)} .stat.both .big{color:var(--both)}
+  .stat .sub{font-size:.82rem;color:var(--ink-3)}
+
+  /* footprint split bars */
+  .fp{display:grid;gap:20px;margin-top:6px}
+  .fprow .fphd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+  .fprow .fphd .nm{font-family:var(--mono);font-weight:600;font-size:.92rem}
+  .fprow.tso .nm{color:var(--tso)} .fprow.wes .nm{color:var(--wes)}
+  .fprow .fphd .tot{font-family:var(--mono);font-size:.8rem;color:var(--ink-3)}
+  .split{display:flex;height:40px;border-radius:9px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line-2)}
+  .split .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-weight:600;
+    font-size:.82rem;font-variant-numeric:tabular-nums;min-width:2px;padding:0 8px;white-space:nowrap}
+  .split .seg.shared{background:var(--both)}
+  .split .seg.only-tso{background:var(--tso)} .split .seg.only-wes{background:var(--wes)}
+  .scalehint{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);margin-top:4px;display:flex;align-items:center;gap:8px}
+  .scalebar{height:8px;border-radius:5px;background:var(--wes);opacity:.65}
+
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mono);font-size:.76rem;color:var(--ink-2)}
+  .swatch{display:inline-flex;align-items:center;gap:7px}
+  .swatch i{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+
+  /* truth-count bars */
+  .tbars{display:grid;gap:14px}
+  .tbar{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+  .tbar .nm{font-family:var(--mono);font-size:.8rem;font-weight:600;text-align:right}
+  .tbar .track{position:relative;height:34px;background:var(--surface-2);border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+  .tbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px 4px 4px 6px;display:flex;align-items:center;
+    justify-content:flex-end;padding-right:12px;color:#fff;font-family:var(--mono);font-weight:600;font-size:.86rem;font-variant-numeric:tabular-nums}
+  .tbar .fill.both{background:var(--both)} .tbar .fill.tso{background:var(--tso)} .tbar .fill.wes{background:var(--wes)}
+
+  /* zone detail cards */
+  .zones{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .zone{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--surface);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px}
+  .zone.tso{border-top:4px solid var(--tso)} .zone.wes{border-top:4px solid var(--wes)}
+  .zone h3{font-family:var(--sans);font-size:1.05rem;font-weight:680}
+  .zone.tso h3{color:var(--tso)} .zone.wes h3{color:var(--wes)}
+  .zone .metric{display:flex;align-items:baseline;gap:10px;font-family:var(--mono)}
+  .zone .metric .v{font-size:1.9rem;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .zone.tso .metric .v{color:var(--tso)} .zone.wes .metric .v{color:var(--wes)}
+  .zone .metric .k{font-size:.78rem;color:var(--ink-3)}
+  .zone p{margin:0;font-size:.9rem;line-height:1.5;color:var(--ink-2)}
+  .zone .foot{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);border-top:1px solid var(--line-2);padding-top:10px;margin-top:auto}
+  .zone .foot b{color:var(--ink)}
+  .miniprog{display:flex;height:10px;border-radius:6px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line-2)}
+  .miniprog .hit{background:var(--good)} .miniprog .bl{background:var(--caveat);opacity:.55}
+
+  /* callout */
+  .callout{border-left:3px solid var(--tint);background:color-mix(in srgb,var(--tint) 9%,transparent);border-radius:0 10px 10px 0;padding:16px 20px;font-size:.92rem}
+  .callout.warn{border-left-color:var(--caveat);background:var(--caveat-wash)}
+  .callout .cq{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tint);display:block;margin-bottom:5px}
+  .callout.warn .cq{color:var(--caveat)}
+
+  /* two-col interpretation */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .col{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--surface)}
+  .col.tso{border-top:4px solid var(--tso)} .col.wes{border-top:4px solid var(--wes)}
+  .col h3{font-family:var(--mono);font-size:.86rem;letter-spacing:.04em;margin-bottom:12px}
+  .col.tso h3{color:var(--tso)} .col.wes h3{color:var(--wes)}
+  .col ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+  .col li{position:relative;padding-left:20px;font-size:.9rem;color:var(--ink-2);line-height:1.45}
+  .col li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:2px}
+  .col.tso li::before{background:var(--tso)} .col.wes li::before{background:var(--wes)}
+
+  /* table */
+  details.data{margin-top:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+  details.data summary{cursor:pointer;padding:12px 18px;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em;color:var(--ink-2);list-style:none}
+  details.data summary::-webkit-details-marker{display:none}
+  details.data summary::before{content:"▸ ";color:var(--ink-3)}
+  details.data[open] summary::before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;font-size:.8rem;font-variant-numeric:tabular-nums}
+  th,td{text-align:right;padding:8px 12px;border-top:1px solid var(--line-2);white-space:nowrap;font-family:var(--mono)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--ink-3);font-weight:600;font-size:.72rem;letter-spacing:.03em}
+  tbody tr:hover{background:var(--surface-2)}
+
+  footer{padding:44px 0 60px;border-top:1px solid var(--line);color:var(--ink-3);font-size:.82rem}
+  footer .srcs{display:grid;gap:6px;margin:14px 0 0;font-family:var(--mono);font-size:.76rem}
+  .sig{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;margin-top:22px;color:var(--ink-3)}
+
+  #tip{position:fixed;z-index:50;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;
+    background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:.72rem;line-height:1.45;padding:8px 11px;border-radius:8px;max-width:280px;box-shadow:0 10px 30px -8px rgba(0,0,0,.45)}
+  #tip.on{opacity:1;transform:translateY(0)} #tip b{color:var(--bg)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    .statgrid,.zones,.cols{grid-template-columns:1fr}
+    .tbar{grid-template-columns:84px 1fr;gap:10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  :focus-visible{outline:2px solid var(--tint);outline-offset:2px;border-radius:3px}
+</style>
+
+<header class="hero">
+  <div class="wrap wide">
+    <div class="topbar">
+      <span class="brandmark"><span class="dot"></span>MOLECULAR&nbsp;TUMOR&nbsp;BOARD&nbsp;·&nbsp;REGION&nbsp;ANALYSIS</span>
+      <button class="toggle" id="themeToggle" aria-label="Toggle light or dark theme">◑ Theme</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Companion to the mutual-region benchmark · HG002 / GIAB v4.2.1</span>
+    <h1>The ground they <em>don't</em> share</h1>
+    <p class="lede">The head-to-head report scores the <span class="heroline">TSO500 panel</span> and the
+      <span class="heroline b">whole-exome</span> where they overlap, and finds them equivalent. But they
+      barely overlap — <strong>the shared DNA is a rounding error of the exome and two-thirds of the panel</strong>.
+      This page maps the territory <em>only one</em> assay covers, and asks what each does there — measured, as always,
+      against GIAB truth.</p>
+    <div class="metastrip">
+      <span class="chip">HG002 · NA24385</span>
+      <span class="chip">GIAB v4.2.1 truth</span>
+      <span class="chip">autosomes 1–22 · b37</span>
+      <span class="chip">rtg vcfeval · squash-ploidy</span>
+      <span class="chip">footprints merged</span>
+    </div>
+    <div class="hero-rule"></div>
+  </div>
+</header>
+
+<!-- 01 THE OVERLAP -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">01</span><span class="eyebrow">How much do they actually share?</span></div>
+    <h2>Almost nothing — and the asymmetry is the whole story</h2>
+    <p class="lede" style="max-width:72ch;margin-bottom:26px">Merged and restricted to the autosomes GIAB
+      v4.2.1 covers, the panel targets <strong>1.88 Mb</strong> and the exome <strong>37.35 Mb</strong>. The DNA
+      they both tile is just <strong>1.28 Mb</strong>. Everything else is exclusive.</p>
+
+    <div class="statgrid">
+      <div class="stat tso" data-tip="Panel targets that the exome capture never tiles<br>0.605 Mb — 32.2% of the 1.88 Mb panel">
+        <div class="lab">Panel-only</div><div class="big tnum">0.61 Mb</div>
+        <div class="sub"><b>32%</b> of the panel · exome never sees it</div></div>
+      <div class="stat both" data-tip="Panel ∩ exome — the shared footprint scored in the head-to-head report">
+        <div class="lab">Shared</div><div class="big tnum">1.28 Mb</div>
+        <div class="sub">the equivalence ground · both tile it</div></div>
+      <div class="stat wes" data-tip="Exome targets outside the panel<br>36.08 Mb — 96.6% of the 37.35 Mb exome">
+        <div class="lab">Exome-only</div><div class="big tnum">36.08 Mb</div>
+        <div class="sub"><b>97%</b> of the exome · panel never sees it</div></div>
+    </div>
+
+    <div class="card" style="margin-top:22px">
+      <div class="fp">
+        <div class="fprow tso">
+          <div class="fphd"><span class="nm">TSO500 panel</span><span class="tot">1.88 Mb total</span></div>
+          <div class="split">
+            <div class="seg shared" style="flex:67.8" data-tip="Shared with the exome · 1.276 Mb">shared 67.8%</div>
+            <div class="seg only-tso" style="flex:32.2" data-tip="Panel-only · 0.605 Mb">panel-only 32.2%</div>
+          </div>
+        </div>
+        <div class="fprow wes">
+          <div class="fphd"><span class="nm">Whole-exome</span><span class="tot">37.35 Mb total</span></div>
+          <div class="split">
+            <div class="seg shared" style="flex:3.4" data-tip="Shared with the panel · 1.276 Mb"></div>
+            <div class="seg only-wes" style="flex:96.6" data-tip="Exome-only · 36.076 Mb">exome-only 96.6%</div>
+          </div>
+        </div>
+      </div>
+      <div class="scalehint" style="margin-top:16px"><span>To scale, the exome is ~20× the panel:</span>
+        <span class="scalebar" style="width:200px"></span><span class="mono" style="color:var(--tso)">▍panel</span></div>
+    </div>
+    <p class="small muted" style="margin-top:12px">The panel is not "a small exome." Two-thirds of it sits inside
+      the exome; the other third is content an exome's coding-exon capture is not built to reach (§03).</p>
+  </div>
+</section>
+
+<!-- 02 WHERE TRUTH CAN JUDGE + COUNTS -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">02</span><span class="eyebrow">Where truth reaches · how many variants live there</span></div>
+    <h2>Each exclusive zone is real, confident DNA — with very different variant loads</h2>
+    <p style="max-width:70ch;margin-bottom:22px">Both exclusive zones sit almost entirely inside GIAB's
+      high-confidence regions — <strong>97.2%</strong> of panel-only and <strong>94.7%</strong> of exome-only —
+      so this is ordinary, judgeable sequence, not junk. But the number of truth variants each holds could hardly
+      be more lopsided.</p>
+
+    <div class="card">
+      <div class="legend" style="margin-bottom:16px">
+        <span class="swatch"><i style="background:var(--both)"></i>Shared</span>
+        <span class="swatch"><i style="background:var(--tso)"></i>Panel-only</span>
+        <span class="swatch"><i style="background:var(--wes)"></i>Exome-only</span>
+        <span class="muted">— GIAB v4.2.1 high-confidence truth variants per zone</span>
+      </div>
+      <div class="tbars">
+        <div class="tbar"><span class="nm" style="color:var(--both)">Shared</span>
+          <div class="track"><div class="fill both" style="width:2.2%;min-width:64px" data-tip="602 truth variants in the shared region (the mutual-region report scores these)">602</div></div></div>
+        <div class="tbar"><span class="nm" style="color:var(--tso)">Panel-only</span>
+          <div class="track"><div class="fill tso" style="width:2.9%;min-width:64px" data-tip="784 truth variants in panel-only ∩ GIAB-HC">784</div></div></div>
+        <div class="tbar"><span class="nm" style="color:var(--wes)">Exome-only</span>
+          <div class="track"><div class="fill wes" style="width:100%" data-tip="27,167 truth variants in exome-only ∩ GIAB-HC — ~45× the shared region">27,167</div></div></div>
+      </div>
+      <p class="small muted" style="margin:16px 0 0">The exome's exclusive territory carries <strong>~45×</strong>
+        the confident truth variants of the shared ground. That gap <em>is</em> the breadth argument — quantified.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 EACH ASSAY IN ITS OWN ZONE -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">03</span><span class="eyebrow">Detection in each assay's exclusive territory</span></div>
+    <h2>Each assay calls its private ground well — for its own reasons</h2>
+    <p style="max-width:70ch;margin-bottom:22px">Scored against GIAB v4.2.1 (canonical, PASS), the same way as the
+      head-to-head report — but now each assay is judged only where <em>it alone</em> reaches.</p>
+
+    <div class="zones">
+      <div class="zone tso">
+        <h3>TSO500 · in panel-only DNA</h3>
+        <div class="metric"><span class="v tnum">100%</span><span class="k">sensitivity on the attempted cut<br>448 / 448 · 1 FP · PPV 99.78%</span></div>
+        <div class="miniprog" data-tip="Of 784 truth variants in panel-only: 665 called, 119 declined — every one of the 119 is a by-design block-list site">
+          <div class="hit" style="flex:665" title="665 detected"></div><div class="bl" style="flex:119" title="119 block-list declines"></div></div>
+        <p>Raw, the panel calls <strong>665 of 784</strong> (84.8%) here — but <strong>all 119 "misses" are
+          block-list declines</strong>: panel-only is the introns and flanks of cancer genes, where error-prone
+          repeats concentrate. Remove those by-design exclusions and it is <strong>perfect</strong> — same story
+          as the shared region.</p>
+        <div class="foot">784 truth variants · <b>119/119</b> misses block-listed · attempted zone <b>0.39 Mb</b></div>
+      </div>
+      <div class="zone wes">
+        <h3>WES · in exome-only DNA</h3>
+        <div class="metric"><span class="v tnum">98.7%</span><span class="k">germline sensitivity<br>26,809 / 27,167 · PPV 98.99%</span></div>
+        <div class="miniprog" data-tip="Exome-only germline: 26,809 of 27,167 truth variants detected">
+          <div class="hit" style="flex:98.68" title="detected"></div><div class="bl" style="flex:1.32" title="missed"></div></div>
+        <p>Across <strong>27,167</strong> truth variants in territory the panel never targets, the exome's native
+          <strong>germline</strong> pipeline calls <strong>98.7%</strong> (somatic mode: 97.5%). This is essentially
+          its genome-wide exome performance — the breadth the panel trades away by design.</p>
+        <div class="foot">27,167 truth variants · somatic <b>97.49%</b> · germline <b>98.68%</b></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px">
+      <span class="cq">The symmetry</span>
+      Neither assay is weak on its own turf. The panel is <em>clean and complete</em> on the small slice it curates
+      (100% attempted); the exome is <em>broad and strong</em> across the 36 Mb it alone covers (~98–99%). They just
+      curate for opposite goals.
+    </div>
+  </div>
+</section>
+
+<!-- 04 WHAT'S IN EACH ZONE -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">04</span><span class="eyebrow">What the exclusive territory actually is</span></div>
+    <h2>Two different kinds of "extra"</h2>
+    <div class="cols">
+      <div class="col tso">
+        <h3>Panel-only · 0.61 Mb</h3>
+        <ul>
+          <li><strong>Deeper context around the cancer genes</strong> — introns, UTRs and promoters the exome's coding-exon capture skips (97% GIAB-judgeable, so ordinary confident DNA).</li>
+          <li><strong>The biomarker scaffold</strong> — the CNV backbone, MSI homopolymer loci and fusion-intron baits that make MSI / TMB / HRD / CNV / fusion calling possible.</li>
+          <li>Small in bp, but it is <em>why the panel is not a small exome</em> — this content is the price of the tumor-biomarker layer.</li>
+        </ul>
+      </div>
+      <div class="col wes">
+        <h3>Exome-only · 36.08 Mb</h3>
+        <ul>
+          <li><strong>The other ~19,500 genes</strong> — every coding exon outside the panel's ~520-gene cancer list.</li>
+          <li><strong>Breadth for rare / novel drivers</strong> — hypothesis-free reach when the panel returns no actionable hit.</li>
+          <li><strong>Germline / hereditary / secondary findings</strong> — true diploid genotypes genome-wide, which a tumor-only panel does not provide.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 WHAT THIS MEANS -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">05</span><span class="eyebrow">Reading it together · caveats</span></div>
+    <h2>The shared region shows equivalence; the exclusive regions show <em>purpose</em></h2>
+    <p style="max-width:70ch">The mutual-region benchmark answers <em>"on the DNA both cover, does the panel call
+      small variants as well as the exome?"</em> — yes. This page answers the next question: <em>"how much do they
+      even cover in common, and what is the rest for?"</em> The answer is that the overlap is tiny, and each assay's
+      real differentiation lives in the territory only it holds — the panel's biomarker scaffold, the exome's
+      20,000-gene breadth. Neither number contradicts the other; they measure different things.</p>
+
+    <div class="callout warn" style="margin-top:8px">
+      <span class="cq">Scope &amp; caveats</span>
+      Autosomes 1–22 only, where GIAB v4.2.1 truth is defined (the panel's full footprint incl. X ≈ 1.97 Mb; here
+      1.88 Mb). Footprints are merged manifests, not per-base capture efficiency. Panel-only detection uses the same
+      block-list "attempted" convention as the head-to-head report; exome-only detection approximates the exome's
+      genome-wide performance. HG002 is a germline reference, so this measures small-variant <em>detection</em> only —
+      the biomarker rationale in §04 is assay design, not a result from these runs.
+    </div>
+
+    <details class="data">
+      <summary>Data table — non-shared region metrics (GIAB v4.2.1, autosomes, canonical, PASS)</summary>
+      <div class="scroll-x">
+      <table style="min-width:720px">
+        <thead><tr><th>Zone</th><th>Size (Mb)</th><th>% of assay</th><th>In GIAB-HC</th><th>Truth vars</th><th>Assay</th><th>TP</th><th>FP</th><th>FN</th><th>Sens</th><th>PPV</th></tr></thead>
+        <tbody>
+          <tr><td>Panel-only (raw)</td><td>0.605</td><td>32.2% of panel</td><td>97.2%</td><td>784</td><td>TSO500</td><td>665</td><td>1</td><td>119</td><td>84.82%</td><td>99.85%</td></tr>
+          <tr><td>Panel-only (attempted)</td><td>0.392</td><td>—</td><td>—</td><td>448</td><td>TSO500</td><td>448</td><td>1</td><td>0</td><td>100.00%</td><td>99.78%</td></tr>
+          <tr><td>Exome-only</td><td>36.076</td><td>96.6% of exome</td><td>94.7%</td><td>27,167</td><td>WES somatic</td><td>26,486</td><td>399</td><td>681</td><td>97.49%</td><td>98.52%</td></tr>
+          <tr><td>Exome-only</td><td>36.076</td><td>96.6% of exome</td><td>94.7%</td><td>27,167</td><td>WES germline</td><td>26,809</td><td>274</td><td>358</td><td>98.68%</td><td>98.99%</td></tr>
+          <tr><td>Shared (mutual)</td><td>1.276</td><td>67.8% / 3.4%</td><td>98.5%</td><td>602</td><td>both</td><td colspan="5" style="text-align:left;color:var(--ink-3)">equivalent — see the head-to-head report</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <span class="eyebrow">Method · reproducible</span>
+    <div class="srcs">
+      <span>panel_only = panel − exome · exome_only = exome − panel · shared = panel ∩ exome &nbsp;(bedtools, merged, autosomes 1–22)</span>
+      <span>truth &amp; detection: rtg vcfeval -b GIAB_v4.2.1 -c &lt;assay&gt; --squash-ploidy -e &lt;zone ∩ GIAB-HC&gt; · canonical (MNV-decomposed), PASS</span>
+      <span>panel-only "attempted" = panel_only ∩ GIAB-HC − official Illumina block list (span-aware, ±200 bp)</span>
+      <span>companion to the mutual-region head-to-head report (REPORT.html); reproduce with <span class="mono">nonshared_regions.sh</span></span>
+    </div>
+    <div class="sig">M. Sabri · Universitätsmedizin Greifswald · 2026-07-15 · each assay scored against GIAB HG002 truth · <span class="mono">benchmark_comparison/</span></div>
+  </div>
+</footer>
+
+<div id="tip" role="status" aria-live="off"></div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  function current(){var s=root.getAttribute('data-theme');return s?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
+  btn && btn.addEventListener('click',function(){root.setAttribute('data-theme',current()==='dark'?'light':'dark');});
+  var tip=document.getElementById('tip');
+  function show(e){var t=e.currentTarget,html=t.getAttribute('data-tip');if(!html)return;tip.innerHTML=html;tip.classList.add('on');move(e);}
+  function move(e){var pad=14,x=e.clientX+pad,y=e.clientY+pad,r=tip.getBoundingClientRect();
+    if(x+r.width>window.innerWidth-8)x=e.clientX-r.width-pad;if(y+r.height>window.innerHeight-8)y=e.clientY-r.height-pad;
+    tip.style.left=x+'px';tip.style.top=y+'px';}
+  function hide(){tip.classList.remove('on');}
+  document.querySelectorAll('[data-tip]').forEach(function(el){el.addEventListener('mouseenter',show);el.addEventListener('mousemove',move);el.addEventListener('mouseleave',hide);});
+})();
+</script>

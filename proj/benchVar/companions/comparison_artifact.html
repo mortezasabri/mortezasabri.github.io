@@ -1,0 +1,774 @@
+<title>TSO500 panel &amp; whole-exome — an MTB workflow decision (HG002 / GIAB)</title>
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:#F1F4F3; --surface:#FFFFFF; --surface-2:#F8FAF9; --raised:#FFFFFF;
+    --ink:#152322; --ink-2:#46534F; --ink-3:#727E7B;
+    --line:#E3E8E6; --line-2:#EEF1F0;
+    --tso:#1E78B4; --wes:#B86E0A; --both:#1F8F5C; --neither:#73828A;
+    --good:#1F8F5C; --caveat:#AF4E45; --tint:#0C6E6A;
+    --tso-wash:rgba(30,120,180,.08); --wes-wash:rgba(184,110,10,.10);
+    --good-wash:rgba(31,143,92,.10); --caveat-wash:rgba(175,78,69,.09);
+    --shadow:0 1px 2px rgba(20,40,38,.05),0 10px 30px -16px rgba(20,40,38,.16);
+    --shadow-sm:0 1px 2px rgba(20,40,38,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0C1110; --surface:#151D1B; --surface-2:#121917; --raised:#1B2422;
+      --ink:#E9EEEC; --ink-2:#A9B4B1; --ink-3:#79847F;
+      --line:#28312F; --line-2:#1E2624;
+      --tso:#3E8AC0; --wes:#C4842E; --both:#33A070; --neither:#8494A0;
+      --good:#33A070; --caveat:#D0807A; --tint:#4FB3AD;
+      --tso-wash:rgba(62,138,192,.14); --wes-wash:rgba(196,132,46,.15);
+      --good-wash:rgba(51,160,112,.14); --caveat-wash:rgba(208,128,122,.13);
+      --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 34px -18px rgba(0,0,0,.7);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F1F4F3; --surface:#FFFFFF; --surface-2:#F8FAF9; --raised:#FFFFFF;
+    --ink:#152322; --ink-2:#46534F; --ink-3:#727E7B;
+    --line:#E3E8E6; --line-2:#EEF1F0;
+    --tso:#1E78B4; --wes:#B86E0A; --both:#1F8F5C; --neither:#73828A;
+    --good:#1F8F5C; --caveat:#AF4E45; --tint:#0C6E6A;
+    --tso-wash:rgba(30,120,180,.08); --wes-wash:rgba(184,110,10,.10);
+    --good-wash:rgba(31,143,92,.10); --caveat-wash:rgba(175,78,69,.09);
+    --shadow:0 1px 2px rgba(20,40,38,.05),0 10px 30px -16px rgba(20,40,38,.16);
+    --shadow-sm:0 1px 2px rgba(20,40,38,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0C1110; --surface:#151D1B; --surface-2:#121917; --raised:#1B2422;
+    --ink:#E9EEEC; --ink-2:#A9B4B1; --ink-3:#79847F;
+    --line:#28312F; --line-2:#1E2624;
+    --tso:#3E8AC0; --wes:#C4842E; --both:#33A070; --neither:#8494A0;
+    --good:#33A070; --caveat:#D0807A; --tint:#4FB3AD;
+    --tso-wash:rgba(62,138,192,.14); --wes-wash:rgba(196,132,46,.15);
+    --good-wash:rgba(51,160,112,.14); --caveat-wash:rgba(208,128,122,.13);
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 14px 34px -18px rgba(0,0,0,.7);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  /* ============ TYPE ============ */
+  :root{
+    --serif:"Charter","Bitstream Charter","Sitka Text",Cambria,"Iowan Old Style",Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  .wide{max-width:1080px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;letter-spacing:-.01em;line-height:1.12;margin:0}
+  h2{font-size:clamp(1.5rem,3.3vw,2.05rem);margin:0 0 .2em}
+  h3{font-size:1.18rem;line-height:1.25;margin:0}
+  p{margin:0 0 1em}
+  a{color:var(--tint);text-underline-offset:2px;text-decoration-thickness:1px}
+  strong{font-weight:650;color:var(--ink)}
+  .mono{font-family:var(--mono)}
+  .tnum{font-variant-numeric:tabular-nums}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .lede{font-size:1.18rem;line-height:1.55;color:var(--ink-2)}
+  .muted{color:var(--ink-3)}
+  .small{font-size:.82rem;line-height:1.5}
+
+  /* ============ LAYOUT PRIMITIVES ============ */
+  section{padding:clamp(40px,7vw,76px) 0;border-top:1px solid var(--line-2)}
+  section:first-of-type{border-top:0}
+  .kicker{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .kicker .num{font-family:var(--mono);font-size:.7rem;color:var(--tint);
+    border:1px solid var(--line);border-radius:100px;padding:3px 9px;letter-spacing:.05em}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow-sm);padding:clamp(18px,3vw,28px)}
+  .grid{display:grid;gap:16px}
+  .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* legend / chips */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:var(--mono);
+    font-size:.76rem;color:var(--ink-2)}
+  .swatch{display:inline-flex;align-items:center;gap:7px}
+  .swatch i{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;
+    font-weight:600;letter-spacing:.04em;padding:4px 10px;border-radius:100px;border:1px solid var(--line);
+    color:var(--ink-2);background:var(--surface-2);white-space:nowrap}
+  .chip.tso{color:var(--tso);border-color:color-mix(in srgb,var(--tso) 40%,var(--line))}
+  .chip.wes{color:var(--wes);border-color:color-mix(in srgb,var(--wes) 40%,var(--line))}
+  .chip.good{color:var(--good);border-color:color-mix(in srgb,var(--good) 42%,var(--line));background:var(--good-wash)}
+  .chip.caveat{color:var(--caveat);border-color:color-mix(in srgb,var(--caveat) 42%,var(--line));background:var(--caveat-wash)}
+
+  /* ============ HEADER ============ */
+  header.hero{padding-top:clamp(44px,7vw,84px);position:relative;overflow:hidden}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:18px 0;font-family:var(--mono);font-size:.72rem;color:var(--ink-3);letter-spacing:.04em}
+  .brandmark{display:flex;align-items:center;gap:9px;color:var(--ink-2);font-weight:600}
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;
+    background:linear-gradient(135deg,var(--tso),var(--wes))}
+  .toggle{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:100px;
+    padding:6px 13px;cursor:pointer;transition:border-color .15s,color .15s}
+  .toggle:hover{border-color:var(--ink-3);color:var(--ink)}
+  .toggle:focus-visible{outline:2px solid var(--tint);outline-offset:2px}
+  h1{font-size:clamp(2.05rem,5.4vw,3.5rem);margin:.18em 0 .32em}
+  h1 .vs{font-family:var(--mono);font-weight:400;font-size:.42em;color:var(--ink-3);
+    vertical-align:middle;padding:0 .35em;letter-spacing:.05em}
+  .heroline{color:var(--tso)}.heroline.b{color:var(--wes)}
+  .metastrip{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .metastrip .chip{background:var(--surface)}
+  .hero-rule{height:3px;margin-top:30px;border-radius:3px;
+    background:linear-gradient(90deg,var(--tso) 0 50%,var(--wes) 50% 100%)}
+
+  /* ============ KPI HERO ROW ============ */
+  .kpirow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .kpi{position:relative;border-radius:14px;padding:22px 22px 20px;background:var(--surface);
+    border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .kpi.tso::before{background:var(--tso)}.kpi.wes::before{background:var(--wes)}
+  .kpi .lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--ink-2);
+    display:flex;align-items:center;gap:8px}
+  .kpi .lab b{font-weight:700}
+  .kpi .big{font-family:var(--mono);font-weight:600;font-variant-numeric:tabular-nums;
+    font-size:clamp(2.3rem,6vw,3.1rem);line-height:1;margin:12px 0 4px;letter-spacing:-.02em}
+  .kpi.tso .big{color:var(--tso)}.kpi.wes .big{color:var(--wes)}
+  .kpi .sub{font-size:.82rem;color:var(--ink-3)}
+
+  /* ============ BAR VIZ ============ */
+  .barblock{display:grid;gap:14px}
+  .barrow{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:center}
+  .barrow .name{font-family:var(--mono);font-size:.78rem;font-weight:600;text-align:right}
+  .barrow .name.tso{color:var(--tso)}.barrow .name.wes{color:var(--wes)}
+  .track{position:relative;height:30px;background:var(--surface-2);border:1px solid var(--line-2);
+    border-radius:7px;overflow:hidden}
+  .fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px 4px 4px 6px;
+    display:flex;align-items:center;justify-content:flex-end;padding-right:10px;
+    font-family:var(--mono);font-size:.8rem;font-weight:600;color:#fff;
+    font-variant-numeric:tabular-nums;transition:width .2s}
+  .fill.tso{background:var(--tso)}.fill.wes{background:var(--wes)}
+  .fill.short{color:var(--ink);justify-content:flex-start;padding-left:0;padding-right:0;background:none}
+  .fill.short span{margin-left:8px}
+
+  /* three views */
+  .views{display:grid;gap:14px}
+  .view{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--surface)}
+  .view .vhd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+  .view .vtag{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--ink-3)}
+  .view.fair{border-color:color-mix(in srgb,var(--good) 34%,var(--line));background:var(--good-wash)}
+  .view.naive{border-style:dashed}
+
+  /* ============ REGION FUNNEL ============ */
+  .funnel{display:grid;gap:9px}
+  .frow{display:grid;grid-template-columns:1fr;gap:5px}
+  .fbar-wrap{display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:center}
+  .fbar{height:34px;border-radius:7px;display:flex;align-items:center;padding-left:14px;
+    color:#fff;font-family:var(--mono);font-weight:600;font-size:.82rem;font-variant-numeric:tabular-nums;
+    box-shadow:var(--shadow-sm)}
+  .fmeta{font-size:.8rem;color:var(--ink-2);line-height:1.35}
+  .fmeta b{font-family:var(--mono);color:var(--ink)}
+
+  /* ============ CONCORDANCE STACK ============ */
+  .concord{margin-top:6px}
+  .stack{display:flex;height:56px;border-radius:9px;overflow:hidden;gap:2px;background:var(--bg)}
+  .seg{position:relative;display:flex;align-items:center;justify-content:center;min-width:2px;
+    font-family:var(--mono);font-weight:600;color:#fff;font-size:.9rem;font-variant-numeric:tabular-nums;
+    transition:filter .15s}
+  .seg:hover{filter:brightness(1.08)}
+  .seg.both{background:var(--both)}.seg.wes{background:var(--wes)}
+  .seg.neither{background:var(--neither)}.seg.tso{background:var(--tso)}
+  .seg.tiny{overflow:visible}
+  .conc-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  .cl{border-top:2px solid var(--c);padding-top:9px}
+  .cl .n{font-family:var(--mono);font-weight:600;font-size:1.35rem;font-variant-numeric:tabular-nums;line-height:1}
+  .cl .t{font-family:var(--mono);font-size:.68rem;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--ink-3);margin-top:5px}
+  .cl .d{font-size:.8rem;color:var(--ink-2);margin-top:4px;line-height:1.4}
+
+  /* ============ FP TRADE ============ */
+  .fptrade{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .fpcard{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--surface)}
+  .fpcard .fphd{font-family:var(--mono);font-size:.8rem;font-weight:600;margin-bottom:12px;
+    display:flex;align-items:center;gap:8px}
+  .fpcard.tso .fphd{color:var(--tso)}.fpcard.wes .fphd{color:var(--wes)}
+  .fpbar{display:flex;height:22px;border-radius:6px;overflow:hidden;gap:2px;background:var(--bg);margin-bottom:8px}
+  .fpbar .in{background:var(--caveat)}.fpbar .out{background:var(--ink-3)}
+  .fpbar .z{flex:1;display:flex;align-items:center;justify-content:center;color:var(--ink-3);
+    font-family:var(--mono);font-size:.7rem}
+
+  /* ============ BIOMARKER CARDS ============ */
+  .biogrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .biocard{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--surface);
+    box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
+  .biocard .bhd{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .biocard h3{font-family:var(--sans);font-size:1.02rem;font-weight:680;letter-spacing:-.01em}
+  .biocard .verdict{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.05em;
+    padding:4px 9px;border-radius:6px;white-space:nowrap}
+  .v-win{color:#fff;background:var(--good)}
+  .v-winstar{color:var(--good);background:var(--good-wash);border:1px solid color-mix(in srgb,var(--good) 40%,transparent)}
+  .v-careful{color:#fff;background:var(--caveat)}
+  .biocard p{margin:0;font-size:.88rem;line-height:1.5;color:var(--ink-2)}
+  .biocard .stat{font-family:var(--mono);font-size:.76rem;color:var(--ink-3);
+    border-top:1px solid var(--line-2);padding-top:9px;margin-top:auto}
+  .biocard .stat b{color:var(--ink)}
+
+  /* ============ CALLOUT ============ */
+  .callout{border-left:3px solid var(--caveat);background:var(--caveat-wash);
+    border-radius:0 10px 10px 0;padding:16px 20px;font-size:.92rem}
+  .callout.info{border-left-color:var(--tint);background:color-mix(in srgb,var(--tint) 9%,transparent)}
+  .callout .cq{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--caveat);display:block;margin-bottom:5px}
+  .callout.info .cq{color:var(--tint)}
+
+  /* ============ DECISION ============ */
+  .decide{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .dcol{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--surface)}
+  .dcol.tso{border-top:4px solid var(--tso)}
+  .dcol.wes{border-top:4px solid var(--wes)}
+  .dcol h3{font-family:var(--mono);font-size:.86rem;letter-spacing:.04em;margin-bottom:12px}
+  .dcol.tso h3{color:var(--tso)}.dcol.wes h3{color:var(--wes)}
+  .dcol ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+  .dcol li{position:relative;padding-left:20px;font-size:.9rem;color:var(--ink-2);line-height:1.45}
+  .dcol li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:2px;background:var(--tint)}
+  .dcol.tso li::before{background:var(--tso)}.dcol.wes li::before{background:var(--wes)}
+
+  /* ============ DATA TABLE (a11y) ============ */
+  details.data{margin-top:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+  details.data summary{cursor:pointer;padding:12px 18px;font-family:var(--mono);font-size:.76rem;
+    letter-spacing:.04em;color:var(--ink-2);list-style:none}
+  details.data summary::-webkit-details-marker{display:none}
+  details.data summary::before{content:"▸ ";color:var(--ink-3)}
+  details.data[open] summary::before{content:"▾ "}
+  table{border-collapse:collapse;width:100%;font-size:.8rem;font-variant-numeric:tabular-nums}
+  th,td{text-align:right;padding:8px 12px;border-top:1px solid var(--line-2);white-space:nowrap;font-family:var(--mono)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--ink-3);font-weight:600;font-size:.72rem;letter-spacing:.03em}
+  tbody tr:hover{background:var(--surface-2)}
+
+  /* ============ FOOTER ============ */
+  footer{padding:44px 0 60px;border-top:1px solid var(--line);color:var(--ink-3);font-size:.82rem}
+  footer .srcs{display:grid;gap:6px;margin:14px 0 0}
+  footer a{color:var(--ink-2)}
+  .sig{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;margin-top:22px;color:var(--ink-3)}
+
+  /* ============ TOOLTIP ============ */
+  #tip{position:fixed;z-index:50;pointer-events:none;opacity:0;transform:translateY(4px);
+    transition:opacity .12s,transform .12s;background:var(--ink);color:var(--bg);
+    font-family:var(--mono);font-size:.72rem;line-height:1.45;padding:8px 11px;border-radius:8px;
+    max-width:260px;box-shadow:0 10px 30px -8px rgba(0,0,0,.45)}
+  #tip.on{opacity:1;transform:translateY(0)}
+  #tip b{color:var(--bg)}
+
+  /* ============ VERDICT BANNER ============ */
+  .verdict{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--surface);
+    box-shadow:var(--shadow);padding:26px 30px 26px 34px;overflow:hidden}
+  .verdict::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,var(--tso),var(--wes))}
+  .verdict .vlabel{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+  .verdict p{font-size:1.1rem;line-height:1.55;margin:0 0 .65em}
+  .verdict p:last-child{margin-bottom:0}
+  .verdict .tso-t{color:var(--tso);font-weight:650}
+  .verdict .wes-t{color:var(--wes);font-weight:650}
+
+  /* ============ CAPABILITY SCORECARD ============ */
+  .scorecard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm)}
+  .sc-row{display:grid;grid-template-columns:1.55fr 56px 56px 2.4fr;gap:14px;align-items:center;
+    padding:13px 20px;border-top:1px solid var(--line-2)}
+  .sc-row.head{background:var(--surface-2);border-top:0;font-family:var(--mono);font-size:.66rem;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+  .sc-row.head .htso,.sc-row.head .hwes{text-align:center}
+  .sc-row.head .htso{color:var(--tso)}.sc-row.head .hwes{color:var(--wes)}
+  .sc-row .cap{font-weight:620;font-size:.9rem;line-height:1.3}
+  .sc-row .why{font-size:.8rem;color:var(--ink-2);line-height:1.4}
+  .sc-c{display:flex;justify-content:center}
+  .mk{width:27px;height:27px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-weight:700;font-size:.82rem;line-height:1}
+  .mk.tso{background:var(--tso);color:#fff}
+  .mk.wes{background:var(--wes);color:#fff}
+  .mk.tie{background:var(--neither);color:#fff}
+  .mk.off{background:transparent;color:var(--ink-3);border:1px solid var(--line)}
+  .sc-note{font-size:.77rem;color:var(--ink-3);margin-top:13px;line-height:1.5}
+
+  /* ============ DECISION MATRIX ============ */
+  .dmatrix{display:grid;gap:10px}
+  .dm-row{display:grid;grid-template-columns:1.7fr 138px 1.65fr;gap:16px;align-items:center;
+    border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:var(--surface)}
+  .dm-row .scn{font-weight:620;font-size:.9rem;line-height:1.35}
+  .dm-row .why{font-size:.8rem;color:var(--ink-2);line-height:1.4}
+  .rec{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:var(--mono);
+    font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:100px;white-space:nowrap;text-align:center}
+  .rec.tso{background:var(--tso-wash);color:var(--tso);border:1px solid color-mix(in srgb,var(--tso) 40%,transparent)}
+  .rec.wes{background:var(--wes-wash);color:var(--wes);border:1px solid color-mix(in srgb,var(--wes) 40%,transparent)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:720px){
+    body{font-size:16px}
+    .kpirow,.fptrade,.biogrid,.decide{grid-template-columns:1fr}
+    .conc-labels{grid-template-columns:1fr 1fr}
+    .fbar-wrap{grid-template-columns:1fr;gap:6px}
+    .fbar-wrap .fmeta{padding-left:2px}
+    .barrow{grid-template-columns:56px 1fr;gap:10px}
+    .sc-row{grid-template-columns:1fr 34px 34px;gap:10px}
+    .sc-row .why{grid-column:1 / -1;margin-top:2px}
+    .sc-row.head .whyh{display:none}
+    .dm-row{grid-template-columns:1fr;gap:8px}
+    .dm-row .rec{justify-self:start}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  :focus-visible{outline:2px solid var(--tint);outline-offset:2px;border-radius:3px}
+</style>
+
+<header class="hero">
+  <div class="wrap wide">
+    <div class="topbar">
+      <span class="brandmark"><span class="dot"></span>ANALYTICAL&nbsp;VALIDATION&nbsp;·&nbsp;MOLECULAR&nbsp;TUMOR&nbsp;BOARD</span>
+      <button class="toggle" id="themeToggle" aria-label="Toggle light or dark theme">◑ Theme</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Molecular Tumor Board · workflow decision · HG002 / GIAB benchmark</span>
+    <h1><span class="heroline">TSO500 panel</span><span class="vs">&amp;</span><span class="heroline b">whole-exome</span></h1>
+    <p class="lede">Which workflow to run, and when. With <strong>each assay scored against the GIAB
+      reference genome HG002</strong> — not against the other — and read against the clinical questions a
+      tumor board actually faces: equivalent for the small variants they share, but built for different
+      jobs. The verdict and decision guide come first; the evidence that backs them follows.</p>
+    <div class="metastrip">
+      <span class="chip">HG002 · NA24385</span>
+      <span class="chip">GIAB v4.2.1 truth</span>
+      <span class="chip">rtg vcfeval · squash-ploidy</span>
+      <span class="chip">PASS · AF ≥ 5%</span>
+      <span class="chip">mutual region 1.257 Mb</span>
+    </div>
+    <div class="hero-rule"></div>
+  </div>
+</header>
+
+<!-- ========= 01. VERDICT + SCORECARD ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">01</span><span class="eyebrow">The verdict · which is better, in what sense</span></div>
+    <h2>Neither wins outright — they're built for different jobs</h2>
+    <div class="verdict" style="margin:18px 0 32px">
+      <div class="vlabel">Bottom line for the MTB</div>
+      <p>For <strong>small-variant calling in the genes they share</strong>, the two workflows are
+        <strong>equivalent</strong> (~99.7% sensitivity) — so assay choice is <em>not</em> a
+        small-variant-quality question. But they are not interchangeable: the panel and the exome
+        deliver different things.</p>
+      <p>For routine <span class="tso-t">solid-tumor profiling and biomarker-driven therapy</span>
+        — MSI, TMB, HRD, CNV, fusions, and low-VAF FFPE calling — the <span class="tso-t">TSO500 panel</span>
+        is the better fit. For <span class="wes-t">breadth, novel or rare targets, and germline /
+        hereditary questions</span>, <span class="wes-t">whole-exome</span> is. The scorecard and
+        decision guide below place each case.</p>
+    </div>
+
+    <h3 style="font-family:var(--sans);font-size:1.05rem;font-weight:680;margin:0 0 14px">Capability scorecard</h3>
+    <div class="scorecard">
+      <div class="sc-row head"><span>Capability</span><span class="htso">TSO500</span><span class="hwes">WES</span><span class="whyh">Basis</span></div>
+      <div class="sc-row"><span class="cap">Small-variant SNV / indel (shared genes)</span>
+        <span class="sc-c"><span class="mk tie">=</span></span><span class="sc-c"><span class="mk tie">=</span></span>
+        <span class="why">99.6% vs 99.8% on shared ground — same DRAGEN engine <em>(measured here)</em></span></div>
+      <div class="sc-row"><span class="cap">Low-VAF / subclonal detection (LoD)</span>
+        <span class="sc-c"><span class="mk tso">✓</span></span><span class="sc-c"><span class="mk off">–</span></span>
+        <span class="why">~5% VAF (UMIs + ~1255× depth) vs ~10–15% — decisive for FFPE / low purity</span></div>
+      <div class="sc-row"><span class="cap">MSI — microsatellite instability</span>
+        <span class="sc-c"><span class="mk tso">✓</span></span><span class="sc-c"><span class="mk off">–</span></span>
+        <span class="why">Validated tumor-only model, 98% vs MSI-PCR, locked cutoff; WES unvalidated</span></div>
+      <div class="sc-row"><span class="cap">TMB — tumor mutational burden</span>
+        <span class="sc-c"><span class="mk tie">=</span></span><span class="sc-c"><span class="mk tie">=</span></span>
+        <span class="why">WES is the <em>reference</em> standard; panel a validated, calibrated surrogate (R²=0.93)</span></div>
+      <div class="sc-row"><span class="cap">HRD — genomic scar (LOH/TAI/LST)</span>
+        <span class="sc-c"><span class="mk tso">✓</span></span><span class="sc-c"><span class="mk off">–</span></span>
+        <span class="why">Dedicated SNP-backbone + validated GIS — needs the TSO500 HRD product*</span></div>
+      <div class="sc-row"><span class="cap">CNV — amplifications / deletions</span>
+        <span class="sc-c"><span class="mk tso">✓</span></span><span class="sc-c"><span class="mk off">–</span></span>
+        <span class="why">Validated CNV backbone; exome CNV segmentation is noisier</span></div>
+      <div class="sc-row"><span class="cap">Gene fusions / splice variants</span>
+        <span class="sc-c"><span class="mk tso">✓</span></span><span class="sc-c"><span class="mk off">–</span></span>
+        <span class="why">TSO500 <strong>RNA</strong> workflow detects these; DNA-only exome cannot</span></div>
+      <div class="sc-row"><span class="cap">Gene breadth / novel &amp; rare drivers</span>
+        <span class="sc-c"><span class="mk off">–</span></span><span class="sc-c"><span class="mk wes">✓</span></span>
+        <span class="why">~20,000 genes vs 523 — discovery of rare / novel targets</span></div>
+      <div class="sc-row"><span class="cap">Germline / hereditary / secondary findings</span>
+        <span class="sc-c"><span class="mk off">–</span></span><span class="sc-c"><span class="mk wes">✓</span></span>
+        <span class="why">True germline genotypes (98.97% on v4.2.1); panel is tumor-only</span></div>
+      <div class="sc-row"><span class="cap">Locked, clinically-validated pipeline</span>
+        <span class="sc-c"><span class="mk tso">✓</span></span><span class="sc-c"><span class="mk off">–</span></span>
+        <span class="why">Fixed content + validated cutoffs; WES for these is lab-developed</span></div>
+      <div class="sc-row"><span class="cap">Cost / turnaround / sample input</span>
+        <span class="sc-c"><span class="mk off">?</span></span><span class="sc-c"><span class="mk off">?</span></span>
+        <span class="why">Lab-specific — add local operational numbers before a final call (not scored here)</span></div>
+    </div>
+    <p class="sc-note"><strong>✓</strong> advantage &nbsp;·&nbsp; <strong>=</strong> equivalent &nbsp;·&nbsp;
+      <strong>–</strong> weaker / not offered &nbsp;·&nbsp; <strong>?</strong> not assessed. Small-variant
+      rows are <em>measured</em> here on GIAB HG002; biomarker rows are design / validation-literature —
+      a germline sample cannot exercise MSI, TMB or HRD. *HRD requires the separate TSO500 HRD product,
+      not the base panel benchmarked here.</p>
+  </div>
+</section>
+
+<!-- ========= 02. DECISION GUIDE (MTB scenarios) ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">02</span><span class="eyebrow">Decision guide · tumor-board scenarios</span></div>
+    <h2>When to use each</h2>
+    <p style="max-width:66ch;margin-bottom:22px">Mapped to the clinical questions a tumor board
+      actually faces. This is general best-practice guidance — the final assay choice is an MTB / QM
+      decision that also weighs local validation, cost, and turnaround.</p>
+    <div class="dmatrix">
+      <div class="dm-row"><span class="scn">Routine solid-tumor CGP for therapy selection (FFPE)</span>
+        <span><span class="rec tso">TSO500 panel</span></span>
+        <span class="why">Actionable SNV/indel/CNV/fusion + MSI/TMB in one validated, low-input report</span></div>
+      <div class="dm-row"><span class="scn">Immunotherapy eligibility — MSI-High, TMB-High</span>
+        <span><span class="rec tso">TSO500 panel</span></span>
+        <span class="why">Validated MSI status + calibrated TMB from a single assay</span></div>
+      <div class="dm-row"><span class="scn">HRD / PARP-inhibitor eligibility (e.g. ovarian)</span>
+        <span><span class="rec tso">TSO500 HRD</span></span>
+        <span class="why">Needs the HRD SNP-backbone product — base panel &amp; WES don't give a validated GIS</span></div>
+      <div class="dm-row"><span class="scn">Low tumor purity / subclonal actionable variant</span>
+        <span><span class="rec tso">TSO500 panel</span></span>
+        <span class="why">Deep UMI-corrected coverage → ~5% VAF limit of detection</span></div>
+      <div class="dm-row"><span class="scn">No actionable hit on panel; rare / atypical tumor</span>
+        <span><span class="rec wes">Whole-exome</span></span>
+        <span class="why">20,000-gene breadth to find novel / rare drivers beyond the 523-gene panel</span></div>
+      <div class="dm-row"><span class="scn">Suspected hereditary cancer / germline / secondary findings</span>
+        <span><span class="rec wes">Whole-exome</span></span>
+        <span class="why">True germline genotypes (germline pipeline); the panel is tumor-only</span></div>
+      <div class="dm-row"><span class="scn">Research / clinical-trial biomarker discovery</span>
+        <span><span class="rec wes">Whole-exome</span></span>
+        <span class="why">Hypothesis-free breadth + reference-grade TMB footprint</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= 03. THE HEADLINE EQUIVALENCE (evidence) ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">03</span><span class="eyebrow">Evidence · shared-ground accuracy</span></div>
+    <h2>On shared ground, they call small variants equally well</h2>
+    <p class="lede" style="max-width:70ch;margin-bottom:26px">Restricted to the 1.216 Mb where
+      <em>both</em> assays actually attempt a call, sensitivity is statistically indistinguishable —
+      the same DRAGEN engine on the same genome gives the same answer.</p>
+    <div class="kpirow">
+      <div class="kpi tso" data-tip="TSO500 · shared attempted ground (1.216 Mb)<br>TP 524 · FP 0 (canonical) · FN 2 · 526 truth variants">
+        <div class="lab"><b>TSO500</b> targeted panel</div>
+        <div class="big tnum">99.62%</div>
+        <div class="sub">sensitivity · PPV 100% · 2 FN of 526</div>
+      </div>
+      <div class="kpi wes" data-tip="WES · shared attempted ground (1.216 Mb)<br>TP 525 · FP 0 (canonical) · FN 1 · 526 truth variants">
+        <div class="lab"><b>WES</b> Agilent exome</div>
+        <div class="big tnum">99.81%</div>
+        <div class="sub">sensitivity · PPV 100% · 1 FN of 526</div>
+      </div>
+    </div>
+    <p class="small muted" style="margin-top:14px">Region = TSO500 panel ∩ WES exome ∩ GIAB v4.2.1
+      high-confidence, minus the sites the panel excludes by design. Both make <strong>zero real false
+      positives</strong> here — PPV 100% each (canonical, MNV-decomposed). The panel's 11 as-called “FP”
+      are DRAGEN MNV representation artifacts of variants GIAB confirms, not errors.</p>
+  </div>
+</section>
+
+<!-- ========= 2. WHY THE REGION MUST BE MUTUAL ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">04</span><span class="eyebrow">Method · why the naïve number lies</span></div>
+    <h2>A benchmark is only as honest as its region</h2>
+    <p style="max-width:68ch">The two projects measured different things: a curated 2 Mb of cancer
+      genes versus 41 Mb of whole exome. Comparing their headline percentages directly is
+      apples-to-oranges. The fair test scores both on the same positions — built by narrowing to
+      the intersection.</p>
+
+    <div class="card" style="margin-top:24px">
+      <div class="funnel">
+        <div class="fbar-wrap">
+          <div class="fbar" style="background:var(--tint);width:100%" data-tip="TSO500 official manifest (b37)">TSO500 panel — 1.97 Mb</div>
+          <div class="fmeta">Full panel footprint<br><b>523 genes + CNV/fusion backbone</b></div>
+        </div>
+        <div class="fbar-wrap">
+          <div class="fbar" style="background:color-mix(in srgb,var(--tint) 82%,var(--ink));width:68.3%" data-tip="Panel ∩ Agilent exome capture">∩ Exome — 1.35 Mb</div>
+          <div class="fmeta">Only <b>68%</b> of the panel is inside the exome — the rest is intronic / promoter / CNV / MSI content</div>
+        </div>
+        <div class="fbar-wrap">
+          <div class="fbar" style="background:color-mix(in srgb,var(--tint) 64%,var(--ink));width:63.8%" data-tip="Panel ∩ Exome ∩ GIAB v4.2.1 high-confidence BED">∩ GIAB high-conf — 1.257 Mb</div>
+          <div class="fmeta"><b>Mutual eval region</b> — where truth is confident and both assays aim</div>
+        </div>
+        <div class="fbar-wrap">
+          <div class="fbar" style="background:color-mix(in srgb,var(--tint) 46%,var(--ink));width:61.7%" data-tip="Mutual region minus TSO500 vendor blocklist">− panel blocklist — 1.216 Mb</div>
+          <div class="fmeta"><b>Shared attempted ground</b> — the fair comparison in §01</div>
+        </div>
+      </div>
+    </div>
+    <p class="small muted" style="margin-top:12px">The panel is not "a small exome." A third of it
+      targets content exome capture never sees — the design difference that makes its biomarker
+      layer possible (§05). The territory each assay covers <em>alone</em> — panel-only vs exome-only —
+      is dissected in the companion <a href="nonshared_regions.html">non-shared regions report</a>.</p>
+  </div>
+</section>
+
+<!-- ========= 3. THREE VIEWS ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">05</span><span class="eyebrow">Same data · four framings</span></div>
+    <h2>Why 87% and 99.6% are the same result</h2>
+    <div class="legend" style="margin:6px 0 22px">
+      <span class="swatch"><i style="background:var(--tso)"></i>TSO500</span>
+      <span class="swatch"><i style="background:var(--wes)"></i>WES</span>
+      <span class="muted">— sensitivity, identical 1.26 Mb region, PASS calls</span>
+    </div>
+
+    <div class="views">
+      <div class="view naive">
+        <div class="vhd"><h3>View A · as-delivered</h3><span class="vtag">misleading — shown on purpose</span></div>
+        <div class="barblock">
+          <div class="barrow"><span class="name tso">TSO500</span>
+            <div class="track"><div class="fill tso" style="width:87.0%" data-tip="TSO500 · full mutual region, no blocklist applied<br>524 / 602 truth variants">87.0%</div></div></div>
+          <div class="barrow"><span class="name wes">WES</span>
+            <div class="track"><div class="fill wes" style="width:97.2%" data-tip="WES · full mutual region<br>585 / 602 truth variants">97.2%</div></div></div>
+        </div>
+        <p class="small muted" style="margin:12px 0 0">Looks like a 10-point WES win. It isn't — 76 of
+          TSO500's 78 "misses" are sites its vendor blocklist tells it <em>not</em> to call.</p>
+      </div>
+
+      <div class="view fair">
+        <div class="vhd"><h3>View B · shared attempted ground</h3><span class="chip good">FAIR COMPARISON</span></div>
+        <div class="barblock">
+          <div class="barrow"><span class="name tso">TSO500</span>
+            <div class="track"><div class="fill tso" style="width:99.62%" data-tip="TSO500 · mutual region minus by-design exclusions<br>524 / 526 truth variants">99.62%</div></div></div>
+          <div class="barrow"><span class="name wes">WES</span>
+            <div class="track"><div class="fill wes" style="width:99.81%" data-tip="WES · mutual region minus TSO500 by-design exclusions<br>525 / 526 truth variants">99.81%</div></div></div>
+        </div>
+        <p class="small muted" style="margin:12px 0 0">Remove the by-design exclusions and the gap
+          collapses to a fifth of a percent. Equivalent.</p>
+      </div>
+
+      <div class="view">
+        <div class="vhd"><h3>View C · SNV vs indel split</h3><span class="vtag">indels: n ≈ 15, not estimable here</span></div>
+        <div class="scroll-x">
+        <table style="min-width:440px">
+          <thead><tr><th>Class</th><th>TSO500 sens</th><th>TSO500 PPV</th><th>WES sens</th><th>WES PPV</th></tr></thead>
+          <tbody>
+            <tr><td>SNV</td><td>88.95%*</td><td>100%</td><td>97.45%</td><td>98.79%</td></tr>
+            <tr><td>Indel / MNV</td><td>7.1%†</td><td>100%†</td><td>85.7%†</td><td>66.7%†</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="small muted" style="margin:12px 0 0">*Depressed only by blocklisted HLA/repeat SNVs;
+          every SNV TSO500 reports here is real (100% PPV). †The mutual region holds only ~15
+          confident indels — neither assay yields a meaningful indel estimate at that n. WES
+          estimates indels well over the full 41 Mb exome (~2,000 indels → 91% sensitivity).</p>
+      </div>
+
+      <div class="view">
+        <div class="vhd"><h3>View D · WES germline pipeline</h3><span class="chip good">WES CEILING</span></div>
+        <div class="barblock">
+          <div class="barrow"><span class="name wes">somatic</span>
+            <div class="track"><div class="fill wes" style="width:99.81%;background:color-mix(in srgb,var(--wes) 30%,var(--surface));color:var(--ink)" data-tip="WES tumor-only somatic — the config used in Views A–C, chosen to match TSO500's caller<br>525 / 526 · shared attempted ground">99.81%</div></div></div>
+          <div class="barrow"><span class="name wes">germline</span>
+            <div class="track"><div class="fill wes" style="width:100%" data-tip="WES DRAGEN germline pipeline · real diploid genotypes<br>526 / 526 · 0 FP · shared attempted ground">100%</div></div></div>
+        </div>
+        <p class="small muted" style="margin:12px 0 0">Views A–C ran WES in <em>tumor-only somatic</em>
+          mode — the like-for-like match to TSO500's caller. WES's native <strong>germline</strong>
+          pipeline is its real ceiling: <strong>526 of 526 with zero false positives</strong> here,
+          and it beats both somatic callsets even on the full mutual region (592/602, 1 FP). Its
+          biggest lift lands over the whole 41 Mb exome, where it raises indel sensitivity from
+          <strong>91% → 99%</strong> and overall to <strong>98.97%</strong> (n ≈ 2,000 indels — where
+          the estimate is meaningful).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= 4. THE DIFF / CONCORDANCE ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">06</span><span class="eyebrow">The diff · mutual variants called</span></div>
+    <h2>602 truth variants, sorted by who found them</h2>
+    <p style="max-width:68ch;margin-bottom:24px">The entire "difference" between the assays lives in
+      one place: repeat/homopolymer DNA the panel declines to call and the exome attempts.</p>
+
+    <div class="card concord">
+      <div class="legend" style="margin-bottom:14px">
+        <span class="swatch"><i style="background:var(--both)"></i>Both</span>
+        <span class="swatch"><i style="background:var(--wes)"></i>WES only</span>
+        <span class="swatch"><i style="background:var(--neither)"></i>Neither</span>
+        <span class="swatch"><i style="background:var(--tso)"></i>TSO500 only</span>
+      </div>
+      <div class="stack" role="img" aria-label="Of 602 truth variants: 523 detected by both, 62 by WES only, 16 by neither, 1 by TSO500 only">
+        <div class="seg both" style="flex:523" data-tip="Detected by BOTH assays<br>523 concordant true positives">523</div>
+        <div class="seg wes" style="flex:62" data-tip="WES only — TSO500 missed<br>60 of 62 sit in the panel's vendor blocklist">62</div>
+        <div class="seg neither" style="flex:16" data-tip="Missed by BOTH — the genuinely hard core<br>all 16 in blocklist: HLA-A cluster, NOTCH4 CAG-repeat, TP53 poly-T">16</div>
+        <div class="seg tso tiny" style="flex:1;min-width:6px" data-tip="TSO500 only — WES missed<br>4:187538942 multiallelic site">&nbsp;</div>
+      </div>
+      <div class="conc-labels">
+        <div class="cl" style="--c:var(--both)"><div class="n" style="color:var(--both)">523</div><div class="t">Both</div><div class="d">Concordant — the assays agree</div></div>
+        <div class="cl" style="--c:var(--wes)"><div class="n" style="color:var(--wes)">62</div><div class="t">WES only</div><div class="d"><strong>60 of 62</strong> are in the panel's by-design blocklist</div></div>
+        <div class="cl" style="--c:var(--neither)"><div class="n" style="color:var(--neither)">16</div><div class="t">Neither</div><div class="d">HLA-A cluster · NOTCH4 repeat · TP53 homopolymer</div></div>
+        <div class="cl" style="--c:var(--tso)"><div class="n" style="color:var(--tso)">1</div><div class="t">TSO500 only</div><div class="d">A multiallelic site depth resolved</div></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--sans);font-size:1.05rem;font-weight:680;margin:34px 0 6px">The trade-off is precision for sensitivity, in repeat DNA</h3>
+    <p style="max-width:66ch;margin-bottom:18px">WES recovers those 60 blocklisted variants — but the
+      same territory is where it makes <em>every one</em> of its false positives. The panel spends
+      that sensitivity to stay clean.</p>
+    <div class="fptrade">
+      <div class="fpcard tso">
+        <div class="fphd">TSO500 · 0 false positives</div>
+        <div class="fpbar"><div class="z">canonical · 0 real FP</div></div>
+        <p class="small muted" style="margin:0">Zero real FPs on this ground. The 11 as-called “FP” are DRAGEN MNV representation artifacts — GIAB confirms those exact variants.</p>
+      </div>
+      <div class="fpcard wes">
+        <div class="fphd">WES · 13 false positives</div>
+        <div class="fpbar" data-tip="All 13 WES false positives fall inside the repeat regions the panel blocklists">
+          <div class="in" style="flex:13" title="in blocklist repeat territory"></div></div>
+        <p class="small muted" style="margin:0"><strong>All 13</strong> land inside the repeat regions
+          the panel excludes — the cost of attempting them.</p>
+      </div>
+    </div>
+    <div class="callout info" style="margin-top:20px">
+      <span class="cq">No blind spot</span>
+      The only 2 variants WES calls cleanly outside the blocklist
+      (<span class="mono">5:251469</span>, <span class="mono">16:89345822</span>) are exactly the two
+      the panel <em>saw and filtered</em> as weak-evidence STR SNVs — not places it is blind.
+    </div>
+  </div>
+</section>
+
+<!-- ========= 5. WHERE THE PANEL WINS ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">07</span><span class="eyebrow">Where the panel is genuinely better</span></div>
+    <h2>The advantage isn't small variants — it's the tumor layer</h2>
+    <div class="callout" style="margin:4px 0 26px">
+      <span class="cq">Read this first</span>
+      HG002 is a <strong>germline</strong> control. It has no somatic mutations, no microsatellite
+      instability, no HRD scar — so <strong>none of TMB / MSI / HRD can be measured on it</strong>,
+      by either assay. This section is a design-and-validation-literature comparison, not a result
+      from these runs.
+    </div>
+
+    <div class="biogrid">
+      <div class="biocard">
+        <div class="bhd"><h3>MSI — microsatellite instability</h3><span class="verdict v-win">PANEL WIN</span></div>
+        <p>A <strong>validated tumor-only model</strong> over 130 pre-selected homopolymer loci with a
+          locked threshold, 98% concordant with MSI-PCR. WES actually has <em>more</em> sites (~3,500)
+          — so the edge is clinical calibration, not site count.</p>
+        <div class="stat">TSO500 <b>130 loci</b> · locked cutoff · <b>98%</b> vs PCR &nbsp;·&nbsp; WES needs a self-built panel-of-normals</div>
+      </div>
+
+      <div class="biocard">
+        <div class="bhd"><h3>HRD — recombination deficiency</h3><span class="verdict v-winstar">PANEL WIN *</span></div>
+        <p>Genomic-instability scoring (LOH + TAI + LST) needs genome-wide allele balance. The
+          <strong>TSO500 HRD</strong> product adds a dedicated SNP backbone + the licensed Myriad
+          algorithm. WES HRD (scarHRD) is research-grade and CNV-noisier.</p>
+        <div class="stat">* Requires the separate <b>TSO500 HRD</b> configuration — not the base assay benchmarked here</div>
+      </div>
+
+      <div class="biocard">
+        <div class="bhd"><h3>TMB — mutational burden</h3><span class="verdict v-careful">NOT A PANEL WIN</span></div>
+        <p>Be honest here: <strong>whole-exome is the reference standard</strong> panels are validated
+          <em>against</em> (TSO500 vs WES R² = 0.93). By footprint, WES is the more stable estimator.
+          The panel's edge is operational — locked cutoff, FFPE robustness, cost — not accuracy.</p>
+        <div class="stat">Don't list TMB as a panel "win" in the validation report</div>
+      </div>
+
+      <div class="biocard">
+        <div class="bhd"><h3>Low-VAF limit of detection</h3><span class="verdict v-win">PANEL WIN</span></div>
+        <p>The panel spends its budget as very deep, UMI-corrected coverage on a small region —
+          <strong>~5% VAF</strong> validated LoD. It matters only on real tumors (subclonal,
+          low-purity, FFPE); on HG002 every variant is at 50–100% VAF, so both saturate.</p>
+        <div class="stat">Median depth here <b>TSO500 1255×</b> vs <b>WES 539×</b> · UMIs vs none</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= 08. SCOPE & CAVEATS ========= -->
+<section>
+  <div class="wrap wide">
+    <div class="kicker"><span class="num">08</span><span class="eyebrow">Scope · caveats · data</span></div>
+    <h2>How this was measured — and what it cannot tell you</h2>
+    <p style="max-width:66ch;margin-bottom:20px">Read the scorecard with these boundaries in mind, so
+      the decision rests on what the data actually supports.</p>
+    <div class="decide" style="grid-template-columns:1fr">
+      <div class="dcol" style="border-top:4px solid var(--tint)">
+        <ul style="list-style:none">
+          <li><strong>HG002 is a germline reference.</strong> It validates small-variant <em>detection</em> only. It has no somatic mutations, no MSI, no HRD scar — so MSI / TMB / HRD were <strong>not measured here</strong>; those scorecard rows rest on assay design and the cited validation literature.</li>
+          <li><strong>Like-for-like comparison.</strong> Both callsets are DRAGEN tumor-only somatic, scored allele-level (<span class="mono">vcfeval --squash-ploidy</span>) against GIAB v4.2.1, PASS, AF ≥ 5%, on the mutual region — identical treatment for both.</li>
+          <li><strong>The deciding factors are the non-measured ones.</strong> Small-variant equivalence is the measured result; the biomarker, breadth and pipeline-validation differences — which drive the recommendation — come from the literature and assay design, not this benchmark.</li>
+          <li><strong>Operational data is local.</strong> Cost, turnaround and sample-input requirements are lab-specific and are not scored here; add your own numbers before a final decision.</li>
+          <li><strong>HRD needs the HRD product.</strong> The base TSO500 assay benchmarked here does not include the HRD SNP-backbone pool.</li>
+        </ul>
+      </div>
+    </div>
+
+    <details class="data">
+      <summary>Data table — region metrics (GIAB v4.2.1, canonical, PASS, squash-ploidy)</summary>
+      <div class="scroll-x">
+      <table style="min-width:640px">
+        <thead><tr><th>Comparison</th><th>Region</th><th>Assay</th><th>TP</th><th>FP</th><th>FN</th><th>Sens</th><th>PPV</th></tr></thead>
+        <tbody>
+          <tr><td>Identical region</td><td>1.257 Mb</td><td>TSO500</td><td>524</td><td>0</td><td>78</td><td>87.04%</td><td>100.00%</td></tr>
+          <tr><td>Identical region</td><td>1.257 Mb</td><td>WES somatic</td><td>585</td><td>13</td><td>17</td><td>97.18%</td><td>97.83%</td></tr>
+          <tr><td>Attempted ground</td><td>1.216 Mb</td><td>TSO500</td><td>524</td><td>0</td><td>2</td><td>99.62%</td><td>100.00%</td></tr>
+          <tr><td>Attempted ground</td><td>1.216 Mb</td><td>WES somatic</td><td>525</td><td>0</td><td>1</td><td>99.81%</td><td>100.00%</td></tr>
+          <tr><td>Attempted ground</td><td>1.216 Mb</td><td>WES germline</td><td>526</td><td>1</td><td>0</td><td>100.00%</td><td>99.81%</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <span class="eyebrow">Sources</span>
+    <div class="srcs">
+      <span>TSO500 clinical validation — small variants ≥99%, ~5% VAF LoD, TMB vs WES R²=0.93, MSI vs PCR 98% · <a href="https://www.sciencedirect.com/science/article/pii/S1525157825000194">J Mol Diagn 2025</a>, <a href="https://www.biorxiv.org/content/10.1101/2020.10.21.349100v1">bioRxiv 2020</a></span>
+      <span>DRAGEN MSI — 130 TSO500 loci vs ~3,500 WES sites, tumor-only + panel-of-normals · <a href="https://help.dragen.illumina.com/dragen-v4.4/product-guide/dragen-v4.4/dragen-dna-pipeline/biomarkers/biomarker-msi">Illumina DRAGEN docs</a></span>
+      <span>TMB panel-size dependence / WES as reference · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7174078/">Friends of Cancer Research TMB Harmonization</a></span>
+      <span>TSO500 HRD — genome-wide SNP pool, GIS = LOH+TAI+LST · <a href="https://www.annalsofoncology.org/article/S0923-7534(22)02901-5/fulltext">Ann Oncol 2022</a></span>
+    </div>
+    <div class="sig">M. Sabri · Universitätsmedizin Greifswald · 2026-07-15 · rtg vcfeval --squash-ploidy · each assay scored against GIAB truth · reproducible from <span class="mono">benchmark_comparison/</span></div>
+  </div>
+</footer>
+
+<div id="tip" role="status" aria-live="off"></div>
+
+<script>
+(function(){
+  // ---- theme toggle (stamps data-theme on :root, overriding prefers-color-scheme both ways) ----
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  function current(){
+    var s=root.getAttribute('data-theme');
+    if(s) return s;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  }
+  btn && btn.addEventListener('click',function(){
+    var next=current()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+  });
+
+  // ---- lightweight per-mark hover tooltip (bars, stat tiles, segments) ----
+  var tip=document.getElementById('tip'), activeTarget=null;
+  function show(e){
+    var t=e.currentTarget, html=t.getAttribute('data-tip'); if(!html) return;
+    tip.innerHTML=html; tip.classList.add('on'); activeTarget=t; move(e);
+  }
+  function move(e){
+    var pad=14, x=e.clientX+pad, y=e.clientY+pad;
+    var r=tip.getBoundingClientRect();
+    if(x+r.width>window.innerWidth-8) x=e.clientX-r.width-pad;
+    if(y+r.height>window.innerHeight-8) y=e.clientY-r.height-pad;
+    tip.style.left=x+'px'; tip.style.top=y+'px';
+  }
+  function hide(){ tip.classList.remove('on'); activeTarget=null; }
+  document.querySelectorAll('[data-tip]').forEach(function(el){
+    el.addEventListener('mouseenter',show);
+    el.addEventListener('mousemove',move);
+    el.addEventListener('mouseleave',hide);
+  });
+})();
+</script>

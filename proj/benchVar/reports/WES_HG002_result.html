@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WES / HG002 benchmark — results</title><style>
+body{font:14px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;padding:26px;background:#f6f8fa;color:#1a1f24}
+h1{font-size:18px;margin:0 0 4px}h2{font-size:15px;margin:30px 0 4px}
+.sub{color:#5b6570;margin:0 0 18px;font-size:13px}
+table{border-collapse:collapse;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12);border-radius:8px;overflow:hidden}
+th,td{padding:8px 13px;border-bottom:1px solid #e5e9ec;font-variant-numeric:tabular-nums;text-align:left}
+th{background:#0b6a63;color:#fff;font-size:12px;letter-spacing:.02em}
+tr.head td{background:#eef6f4;font-weight:700}
+td.n{text-align:right}.g{color:#0b7a3b;font-weight:700}.y{color:#8a6d00;font-weight:700}.o{color:#a15c00;font-weight:700}.r{color:#b3261e;font-weight:700}
+@media(prefers-color-scheme:dark){body{background:#15181c;color:#e6edf3}table{background:#1c2126}th,td{border-color:#2a3138}tr.head td{background:#16302b}}
+</style></head><body>
+<h1>WES / HG002 &mdash; small-variant benchmark results</h1>
+<p class="sub">Metric: rtg vcfeval, inside exome &cap; GIAB high-confidence. <b>Headline = DRAGEN Germline vs validated GIAB v4.2.1, genotype-aware.</b></p>
+<h2>1. Primary results</h2>
+<p class="sub">Germline caller, and the somatic tumor-only caller with the AF &ge; 0.05 pre-filter.</p>
+<table><tr><th>Truth set</th><th>Caller</th><th>Matching</th><th>SNV sens</th><th>SNV PPV</th><th>Indel sens</th><th>Indel PPV</th></tr>
+<tr class="head"><td>v4.2.1_validated</td><td>germline</td><td>genotype-aware</td><td class="n g">98.85%</td><td class="n g">99.47%</td><td class="n y">96.56%</td><td class="n y">94.14%</td></tr>
+<tr><td>v4.2.1_validated</td><td>germline</td><td>squash-ploidy</td><td class="n g">98.98%</td><td class="n g">99.58%</td><td class="n g">98.78%</td><td class="n y">96.44%</td></tr>
+<tr><td>v4.2.1_validated</td><td>somatic_AFge05</td><td>squash-ploidy</td><td class="n y">97.79%</td><td class="n g">99.06%</td><td class="n y">91.12%</td><td class="n o">88.64%</td></tr>
+<tr><td>Q100v1.1_draft</td><td>germline</td><td>genotype-aware</td><td class="n y">97.88%</td><td class="n g">99.10%</td><td class="n o">79.16%</td><td class="n o">79.63%</td></tr>
+<tr><td>Q100v1.1_draft</td><td>germline</td><td>squash-ploidy</td><td class="n g">98.11%</td><td class="n g">99.28%</td><td class="n o">88.24%</td><td class="n o">88.81%</td></tr>
+<tr><td>Q100v1.1_draft</td><td>somatic_AFge05</td><td>squash-ploidy</td><td class="n y">96.81%</td><td class="n g">98.78%</td><td class="n r">73.02%</td><td class="n o">83.53%</td></tr>
+</table>
+<h2>2. Somatic tumor-only &mdash; with vs without the AF &ge; 0.05 pre-filter</h2>
+<p class="sub">Identical calls, identical region, identical matching. The only difference is the
+AF pre-filter. HG002 is a germline sample, so every true variant sits near 50% or 100% VAF and
+nothing real lives below 5% AF &mdash; what the filter removes is somatic-caller noise, which is
+why dropping it costs precision without recovering sensitivity.</p>
+<table><tr><th>Truth set</th><th>Call set</th><th>Matching</th><th>SNV sens</th><th>SNV PPV</th><th>Indel sens</th><th>Indel PPV</th></tr>
+<tr><td>v4.2.1_validated</td><td>somatic, AF &ge; 0.05</td><td>squash-ploidy</td><td class="n y">97.79%</td><td class="n g">99.06%</td><td class="n y">91.12%</td><td class="n o">88.64%</td></tr>
+<tr><td>v4.2.1_validated</td><td>somatic, no AF filter</td><td>squash-ploidy</td><td class="n y">97.83%</td><td class="n y">97.89%</td><td class="n y">91.12%</td><td class="n o">81.45%</td></tr>
+<tr><td>Q100v1.1_draft</td><td>somatic, AF &ge; 0.05</td><td>squash-ploidy</td><td class="n y">96.81%</td><td class="n g">98.78%</td><td class="n r">73.02%</td><td class="n o">83.53%</td></tr>
+<tr><td>Q100v1.1_draft</td><td>somatic, no AF filter</td><td>squash-ploidy</td><td class="n y">96.82%</td><td class="n y">97.48%</td><td class="n r">73.02%</td><td class="n o">77.19%</td></tr>
+</table><p class="sub">Full machine-readable table: results/comparison.csv</p></body></html>
