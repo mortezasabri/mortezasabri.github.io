@@ -105,7 +105,7 @@
     <section id="about" class="section">
       <h2>About Me</h2>
       <p>
-        I trained as a biologist and now build the bioinformatics infrastructure that turns complex omics datasets into actionable clinical and biological insight. Currently, I work as a Bioinformatician at Universitätsmedizin Greifswald (Institute of Molecular Genomics &amp; Institute of Bioinformatics), where I build and maintain clinical cancer genomics infrastructure for the Molecular Tumor Board—including enhancement of <a href="https://github.com/AG-Boerries/MIRACUM-Pipe" target="_blank"><strong>MIRACUM-Pipe</strong></a> in collaboration with colleagues at University Medical Center Rostock, TSO500 somatic variant workflow automation, and methylome-based glioblastoma classification. Since 2017, I've developed and optimized pipelines for bulk and single-cell RNA sequencing, DNA methylation analysis, and genome assembly—combining hands-on wet-lab experience with advanced computational expertise. I also authored <a href="https://github.com/mortezasabri/goiExplorer" target="_blank"><strong>goiExplorer</strong></a>, an R package for interactive gene-of-interest exploration from count matrices or Salmon outputs.
+        I trained as a biologist and now build the bioinformatics infrastructure that turns complex omics datasets into actionable clinical and biological insight. Currently, I work as a Bioinformatician at Universitätsmedizin Greifswald (Institute of Molecular Genomics &amp; Institute of Bioinformatics), where I build and maintain clinical cancer genomics infrastructure for the Molecular Tumor Board—including enhancement of <a href="https://github.com/AG-Boerries/MIRACUM-Pipe" target="_blank"><strong>MIRACUM-Pipe</strong></a> in collaboration with colleagues at University Medical Center Rostock, TSO500 somatic variant workflow automation, reference-standard validation of clinical NGS assays, and methylome-based glioblastoma classification. Since 2017, I've developed and optimized pipelines for bulk and single-cell RNA sequencing, DNA methylation analysis, and genome assembly—combining hands-on wet-lab experience with advanced computational expertise. I also authored <a href="https://github.com/mortezasabri/goiExplorer" target="_blank"><strong>goiExplorer</strong></a>, an R package for interactive gene-of-interest exploration from count matrices or Salmon outputs.
       </p>
     </section>
 
@@ -115,6 +115,7 @@
       <ul>
         <li>Clinical Cancer Genomics &amp; Computational Oncology</li>
         <li>Molecular Tumor Board (MTB) Infrastructure &amp; Reporting</li>
+        <li>Clinical Assay Validation &amp; Reproducibility</li>
         <li>Transcriptomics (bulk and single-cell)</li>
         <li>Methylome Analysis &amp; Epigenomics</li>
         <li>Multi-Omics Data Integration</li>
@@ -133,7 +134,7 @@
           <tr>
             <td>Oct 2025 – Present</td>
             <td>Bioinformatician, Universitätsmedizin Greifswald<br><em>Institute of Molecular Genomics &amp; Institute of Bioinformatics</em></td>
-            <td>Clinical cancer genomics for Molecular Tumor Board (MTB). Enhancement and maintenance of MIRACUM-Pipe (WES somatic variant pipeline — SNV/InDel/CNV/LoH) in collaboration with colleagues at University Medical Center Rostock. Automation of TSO500 somatic variant analysis on Illumina ICA/ICI, methylome-based glioblastoma subgroup classification, and AI-assisted oncogenic evidence aggregation for MTB reporting.</td>
+            <td>Clinical cancer genomics for Molecular Tumor Board (MTB). Enhancement and maintenance of MIRACUM-Pipe (WES somatic variant pipeline — SNV/InDel/CNV/LoH) in collaboration with colleagues at University Medical Center Rostock. Automation of TSO500 somatic variant analysis on Illumina ICA/ICI, methylome-based glioblastoma subgroup classification, and AI-assisted oncogenic evidence aggregation for MTB reporting. Design and execution of reference-standard validation studies for clinical NGS workflows, delivered as versioned SOPs and standalone reproducibility packages.</td>
           </tr>
           <tr><td>Jan 2025 – Apr 2025</td><td>Bioinformatician, RWTH Aachen University</td><td>Focused on epigenomics & transcriptomics in mice and humans.</td></tr>
           <tr><td>Nov 2023 – Nov 2024</td><td>Bioinformatician, Technical University of Munich</td><td>Optimized bulk & single-cell RNA-Seq workflows.</td></tr>
@@ -192,10 +193,10 @@
     <section id="skills" class="section">
       <h2>Skills</h2>
       <ul>
-        <li><strong>Bioinformatics:</strong> Bulk &amp; scRNA-Seq, Methylation arrays, ChIP-Seq, Methyl-Seq, Genome assembly, TSO500 somatic variant panel, WES (MIRACUM-Pipe)</li>
+        <li><strong>Bioinformatics:</strong> Bulk &amp; scRNA-Seq, Methylation arrays, ChIP-Seq, Methyl-Seq, Genome assembly, TSO500 somatic variant panel, WES (MIRACUM-Pipe), assay validation &amp; concordance benchmarking</li>
         <li><strong>Programming:</strong> R (proficient), <a href="https://www.linkedin.com/learning/certificates/51acdfdd6b47b7e9ea3e01ff81405e565270b947ee1eb015ab79d7042e4e1a13" target="_blank">Shell</a> (intermediate), Python (basic), Git/GitHub, LaTeX, Markdown, MATLAB (basic)</li>
         <li><strong>Analysis:</strong> Statistical modeling, differential expression, visualization, somatic variant calling &amp; annotation</li>
-        <li><strong>Infrastructure:</strong> Nextflow, Docker/Singularity, Illumina ICA/ICI CLI, workflow automation</li>
+        <li><strong>Infrastructure:</strong> Nextflow, Docker/Singularity, Illumina ICA/ICI CLI &amp; DRAGEN, hap.py/GA4GH benchmarking, REST API integration, systemd services, workflow automation</li>
         <li><strong>Softwares:</strong> VS Code, Jupyter Notebook, Trailmaker, Galaxy, SPSS, CLC Genomics Workbench</li>
         <li><strong>HPC:</strong> Sherlock cluster (Stanford University, via collaboration), RWTH Aachen cluster, and Greifswald HPC</li>
         <li><strong>Tools:</strong> Bowtie2, STAR, Salmon, limma, Bioconductor, MIRACUM-Pipe, etc.</li>
@@ -225,6 +226,15 @@
             <li>DRAGEN TSO500 pipeline: SNV/InDel, CNV, TMB, MSI, gene fusions</li>
             <li>QC filtering (coverage thresholds, contamination checks) and audit tracking</li>
             <li>Output: structured variant reports for clinical MTB review</li>
+          </ul>
+        </li>
+        <li><strong>Assay Validation &amp; Concordance Benchmarking</strong>
+          <ul>
+            <li>Input: sequencing data from reference-standard materials (GIAB and commercial ddPCR-certified controls)</li>
+            <li>Truth-set selection and scoping; target-region and block-list handling</li>
+            <li>Stratified concordance analysis by variant class, with caller-mode, allele-frequency, and systematic-noise confounders tested rather than assumed</li>
+            <li>Comparison engines: GA4GH-conformant hap.py (containerized) alongside an in-house VCF-vs-VCF engine shared across studies</li>
+            <li>Output: versioned SOP and standalone reproducibility package per study</li>
           </ul>
         </li>
         <li><strong>Methylome Classification (Glioblastoma Subgroups)</strong>
