@@ -81,8 +81,9 @@
 Clinical Bioinformatician (M.Sc.\ Biology, Genetics) with expertise in cancer genomics, NGS pipeline
 engineering, and Molecular Tumor Board (MTB) infrastructure. Currently at Universit\"atsmedizin
 Greifswald, enhancing and maintaining \textbf{MIRACUM-Pipe} (somatic variant pipeline for whole-exome
-and targeted panel sequencing) in collaboration with University Medical Center Rostock, automating TSO500 somatic panel workflows on
-Illumina ICA/ICI, and developing methylome-based glioblastoma classification pipelines. Extensive R
+and targeted panel sequencing) in collaboration with University Medical Center Rostock, automating
+TSO500 somatic panel workflows on Illumina ICA/ICI, validating clinical NGS assays against reference
+standards, and developing methylome-based glioblastoma classification pipelines. Extensive R
 programming experience since 2017 with proven expertise in bulk and single-cell transcriptomics,
 methylation arrays, and reproducible pipeline development. Author of
 \href{https://github.com/mortezasabri/goiExplorer}{\textbf{goiExplorer}}, an R package for interactive
@@ -102,6 +103,8 @@ gene-of-interest exploration.
   \textbullet\ Data visualization \& reproducibility \\
   \textbullet\ MTB infrastructure \& somatic variant analysis     &
   \textbullet\ Study design \& data interpretation \\
+  \textbullet\ Clinical assay validation \& benchmarking          &
+  \textbullet\ Versioned SOPs \& reproducibility packages \\
 \end{tabular}
 
 % ════════════════════════════════════════════
@@ -115,9 +118,12 @@ gene-of-interest exploration.
   {Greifswald}
 \begin{itemize}
   \item Enhancement and maintenance of MIRACUM-Pipe (somatic variant pipeline for whole-exome and
-        targeted panel sequencing: SNV/InDel/CNV/LoH) in collaboration with University Medical Center Rostock for clinical MTB use
+        targeted panel sequencing: SNV/InDel/CNV/LoH) in collaboration with University Medical Center
+        Rostock for clinical MTB use
   \item Automation of TSO500 somatic panel workflows on Illumina ICA/ICI (sample sheet validation,
         DRAGEN pipeline, QC filtering, audit tracking)
+  \item Reference-standard validation of clinical NGS assays (truth-set scoping, stratified concordance,
+        GA4GH-conformant comparison), delivered as versioned SOPs and reproducibility packages
   \item Methylome-based glioblastoma subgroup classification using EPIC arrays and Heidelberg CNS classifier
   \item AI-assisted oncogenic evidence aggregation for Molecular Tumor Board reporting
   \item Institutes: Institute of Molecular Genomics \& Institute of Bioinformatics
@@ -221,9 +227,13 @@ gene-of-interest exploration.
 \begin{tabular}{@{}>{\bfseries}p{4.5cm}p{11.5cm}@{}}
   Lab Techniques       & RNA/DNA isolation, PCR/qRT-PCR, primer design and optimization, electrophoresis \\[0pt]
   Programming          & R (proficient), Python (basic), MATLAB (basic), Shell/Bash, Git/GitHub, \LaTeX, Markdown \\[0pt]
-  Infrastructure       & Nextflow, Docker/Singularity, Illumina ICA/ICI CLI, workflow automation \\[0pt]
+  Infrastructure       & Nextflow, Docker/Singularity, Illumina ICA/ICI CLI \& DRAGEN,
+                         hap.py/GA4GH benchmarking, REST API integration, systemd,
+                         workflow automation \\[0pt]
   Bioinformatics       & Bulk RNA-Seq, scRNA-Seq, methylation arrays, ChIP-Seq, Methyl-Seq,
-                         TSO500 somatic panel, WES (MIRACUM-Pipe), somatic variant calling \& annotation \\[0pt]
+                         TSO500 somatic panel, WES \& targeted panel (MIRACUM-Pipe),
+                         somatic variant calling \& annotation,
+                         assay validation \& concordance benchmarking \\[0pt]
   Software             & CLC Genomics Workbench, Galaxy, SPSS, JupyterLab, Trailmaker, VS Code \\[0pt]
   HPC Platforms        & Sherlock cluster (Stanford University, via collaboration), RWTH Aachen cluster,
                          Greifswald HPC \\[0pt]
@@ -301,6 +311,9 @@ See \href{https://mortezasabri.github.io/#teaching}{portfolio} for details.
         (BWA-MEM $\rightarrow$ Mutect2/VarScan2/CNVkit $\rightarrow$ ANNOVAR/CIViC $\rightarrow$ MTB PDF report)
   \item TSO500 Somatic Panel --- Illumina ICA/ICI automation
         (Sample sheet validation $\rightarrow$ DRAGEN $\rightarrow$ QC $\rightarrow$ clinical variant report)
+  \item Assay Validation \& Concordance Benchmarking
+        (Reference standards $\rightarrow$ truth-set scoping \& stratification $\rightarrow$
+        hap.py/GA4GH \& in-house VCF comparison $\rightarrow$ SOP \& reproducibility package)
   \item Methylome Classification --- Glioblastoma subgroups
         (IDAT $\rightarrow$ minfi/ChAMP $\rightarrow$ Heidelberg CNS classifier $\rightarrow$ subgroup report)
   \item Bulk RNA-Seq / polyA / ncRNA-Seq
@@ -326,8 +339,19 @@ See \href{https://mortezasabri.github.io/#pipelines}{portfolio} for details.
 \href{https://github.com/AG-Boerries/MIRACUM-Pipe}{github.com/AG-Boerries/MIRACUM-Pipe}
 \begin{itemize}
   \item Somatic variant pipeline for whole-exome and targeted panel sequencing, originally developed by
-        AG Boerries (University Medical Center Freiburg); maintaining and adapting for the MTBs and CCCs at Universit\"atsmedizin Greifswald and
-        University Medical Center Rostock (QC tuning, reporting modules, institutional workflow integration)
+        AG Boerries (University Medical Center Freiburg); maintaining and adapting for the MTBs and CCCs
+        at Universit\"atsmedizin Greifswald and University Medical Center Rostock (QC tuning, reporting
+        modules, institutional workflow integration)
+\end{itemize}
+
+\vspace{1pt}
+
+\noindent\textbf{VCF Concordance Toolkit} (validation \& pipeline comparison)
+\begin{itemize}
+  \item General-purpose VCF-vs-VCF comparison engine underpinning reference-standard validation studies:
+        stratified concordance by variant class, target-region and block-list handling, and a containerized
+        GA4GH hap.py engine mode; also orchestrates alternative pipelines on the same input and reports
+        callset agreement. Built on clinical infrastructure; not publicly hosted
 \end{itemize}
 
 \vspace{1pt}
